@@ -10,7 +10,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
- * @ORM\Entity(repositoryClass=ClientRepository::class)
  * @ORM\HasLifecycleCallbacks
  * @ApiResource()
  */

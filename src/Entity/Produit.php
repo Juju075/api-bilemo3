@@ -8,7 +8,6 @@ use App\Entity\Traits\Timestampable;
 use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
- * @ORM\Entity(repositoryClass=ProduitRepository::class)
  * @ORM\HasLifecycleCallbacks
  * @ApiResource()
  */
