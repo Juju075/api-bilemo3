@@ -5,12 +5,13 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\Ressourceid;
 use App\Entity\Traits\Timestampable;
-use App\Repository\ClientRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=ClientRepository::class)
+ * @ApiResource()
  */
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {

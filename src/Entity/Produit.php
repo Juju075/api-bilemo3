@@ -5,10 +5,11 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\Ressourceid;
 use App\Entity\Traits\Timestampable;
-use App\Repository\ProduitRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity(repositoryClass=ProduitRepository::class)
+ * @ApiResource()
  */
 class Produit
 {
