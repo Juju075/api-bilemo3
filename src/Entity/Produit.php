@@ -12,8 +12,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
  * @ORM\HasLifecycleCallbacks
  * @ApiResource(
- *  collectionOperations={"get", "post"},
- *  itemOperations={"get", "put", "patch", "delete"}
+ *  collectionOperations={"get"={"normalization_context"={"produit_read"}}, "post"},
+ *  itemOperations={"get"={"normalization_context"={"produit_detail_read"}}, "put", "patch", "delete"}
  * )
  */
 class Produit
@@ -23,21 +23,25 @@ class Produit
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"produit_read"}, {"produit_detail_read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"produit_read"}, {"produit_detail_read"})
      */
     private $model;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"produit_read"}, {"produit_detail_read"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups({"produit_read"}, {"produit_detail_read"})
      */
     private $price;
 
