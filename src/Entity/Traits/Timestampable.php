@@ -16,7 +16,11 @@ namespace App\Entity\Traits;
 
 
 
-    
+        /**
+         * Undocumented function
+         *@Groups({"client_read"}, {"client_detail_read"}, {"produit_read"}, {"produit_detail_read"})
+         * @return \DateTimeInterface|null
+         */
         public function getCreatedAt(): ?\DateTimeInterface
         {
             return $this->createdAt;
