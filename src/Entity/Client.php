@@ -6,10 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\Ressourceid;
 use App\Entity\Traits\Timestampable;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
+ * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
  * @ORM\HasLifecycleCallbacks
  * @ApiResource(
  *  collectionOperations={"get", "post"},

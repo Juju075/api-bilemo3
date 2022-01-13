@@ -6,8 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\Ressourceid;
 use App\Entity\Traits\Timestampable;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
+ * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
  * @ORM\HasLifecycleCallbacks
  * @ApiResource(
  *  collectionOperations={"get", "post"},
