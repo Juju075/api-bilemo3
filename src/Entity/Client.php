@@ -10,12 +10,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
+// "put"={"denormalization_context"={"client_detail_write"}}, "patch", "delete"}
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
  * @ORM\HasLifecycleCallbacks
  * @ApiResource(
  *  collectionOperations={"get"={"normalization_context"={"client_read"}}, "post"={"denormalization_context"={"client_write"}}},
- *  itemOperations={"get"={"normalization_context"={"client_detail_read"}}, "put"={"denormalization_context"={"client_detail_write"}}, "patch", "delete"}
+ *  itemOperations={"get"={"normalization_context"={"client_detail_read"}}, 
+ *   "put"={"denormalization_context"={"client_detail_write"}}, "patch", "delete"}
  * )
  */
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
