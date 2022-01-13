@@ -13,12 +13,12 @@ class ClientsFixtures extends Fixture
     /**
      * @var UserPasswordEncoderInterface
      */
-    private UserPasswordEncoderInterface $userPasswordEncoder;
+    private UserPasswordEncoderInterface $clientPasswordEncoder;
 
 
 
-    public function __construct(UserPasswordEncoderInterface $userPasswordEncoder){
-        $this->userPasswordEncoder = $userPasswordEncoder;
+    public function __construct(UserPasswordEncoderInterface $clientPasswordEncoder){
+        $this->clientPasswordEncoder = $clientPasswordEncoder;
     }
 
     public function load(ObjectManager $manager): void
@@ -37,6 +37,7 @@ class ClientsFixtures extends Fixture
             $client->setRoles(['ROLE_USER'])
             ->setPassword($this->clientPasswordEncoder->encodePassword($client, 'identique'));
             //$this->addReference($className . '_' . $i, $entity)
+            //dates creation 
             $manager->persist($client);
 
         } 

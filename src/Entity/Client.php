@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=ClientRepository::class)
+ * @ORM\HasLifecycleCallbacks
  * @ApiResource()
  */
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
