@@ -14,8 +14,8 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
  * @ORM\HasLifecycleCallbacks
  * @ApiResource(
- *  collectionOperations={"get"={"normalization_context"={"client_read"}}, "post"},
- *  itemOperations={"get"={"normalization_context"={"client_detail_read"}}, "put", "patch", "delete"}
+ *  collectionOperations={"get"={"normalization_context"={"client_read"}}, "post"={"denormalization_context"={"client_write"}}},
+ *  itemOperations={"get"={"normalization_context"={"client_detail_read"}}, "put"={"denormalization_context"={"client_detail_write"}}, "patch", "delete"}
  * )
  */
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
@@ -25,13 +25,13 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"client_read"}, {"client_detail_read"})
+     * @Groups({"client_read"}, {"client_detail_read"}, {"client_write"}, {"client_detail_write"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
-     * @Groups({"client_read"}, {"client_detail_read"})
+     * @Groups({"client_read"}, {"client_detail_read"}, {"client_write"}, {"client_detail_write"})
      */
     private $roles = [];
 
