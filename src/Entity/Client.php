@@ -2,22 +2,21 @@
 
 namespace App\Entity;
 
-use App\Repository\ClientRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use App\Entity\Traits\Ressourceid;
+use App\Entity\Traits\Timestampable;
+use App\Repository\ClientRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=ClientRepository::class)
  */
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    use Timestampable;  
+
+    use Ressourceid;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)

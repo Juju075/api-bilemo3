@@ -2,20 +2,19 @@
 
 namespace App\Entity;
 
-use App\Repository\ProduitRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Traits\Ressourceid;
+use App\Entity\Traits\Timestampable;
+use App\Repository\ProduitRepository;
 
 /**
  * @ORM\Entity(repositoryClass=ProduitRepository::class)
  */
 class Produit
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    use Timestampable;  
+
+    use Ressourceid;
 
     /**
      * @ORM\Column(type="string", length=255)
