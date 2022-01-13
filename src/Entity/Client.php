@@ -11,7 +11,10 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * @ORM\HasLifecycleCallbacks
- * @ApiResource()
+ * @ApiResource(
+ *  collectionOperations={"get", "post"},
+ *  itemOperations={"get", "put", "patch", "delete"}
+ * )
  */
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {

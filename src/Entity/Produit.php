@@ -9,7 +9,10 @@ use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\HasLifecycleCallbacks
- * @ApiResource()
+ * @ApiResource(
+ *  collectionOperations={"get", "post"},
+ *  itemOperations={"get", "put", "patch", "delete"}
+ * )
  */
 class Produit
 {
