@@ -21,7 +21,6 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use Timestampable;  
-
     use Ressourceid;
 
     /**
