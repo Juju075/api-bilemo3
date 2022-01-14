@@ -16,17 +16,17 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  itemOperations={"get"={"normalization_context"={"produit_detail_read"}}, 
  *  "post"={
  *      "method"="POST",
- *      "path"="/produits/create",
+ *      "path"="/produit/create",
  *      "controller"="CreateProduit::class",
  *  }, 
  *  "patch"={
  *      "method"="PATCH",
- *      "path"="/produits/update/{id}",
+ *      "path"="/produit/update/{id}",
  *      "controller"="UpdateProduit::class",
  * },
  *  "delete"={
  *      "method"="DELETE",
- *      "path"="/produits/delete/{id}",
+ *      "path"="/produit/delete/{id}",
  *      "controller"="DeleteProduit::class",
  * }}
  * )
