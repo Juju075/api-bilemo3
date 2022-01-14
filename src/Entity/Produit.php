@@ -8,16 +8,14 @@ use App\Entity\Traits\Timestampable;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-// "put", "patch", "delete"}
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
  * @ORM\HasLifecycleCallbacks
  * @ApiResource(
  *  collectionOperations={"get"={"normalization_context"={"produit_read"}}, "post"},
  *  itemOperations={"get"={"normalization_context"={"produit_detail_read"}}, 
- *  "put"={
- *      "method"="PUT",
+ *  "post"={
+ *      "method"="POST",
  *      "path"="/produits/create",
  *      "controller"="CreateProduit::class",
  *  }, 

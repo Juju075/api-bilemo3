@@ -14,5 +14,13 @@ class ClientTest extends TestCase
         parent::setUp();
         $this->clientResource = new Client();
     }
+    public function testGetEmail():void
+    {
+        //test aussi les fonctions associe
+    }
+    public function testGetRoles():void
+    {
+        
+    }
 
 }
