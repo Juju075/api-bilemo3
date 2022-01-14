@@ -3,14 +3,12 @@ declare(strict_types = 1);
 namespace App\Controller;
 
 use App\Entity\Produit;
-
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 
 //Sur call de controlleur
 
 #[AsController]
-class UpdateProduit extends AbstractController
+class UpdateProduit
 {
     /**
      * Undocumented function
