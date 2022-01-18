@@ -13,7 +13,9 @@ class ProduitPublishingHandler {
      */
    public function handle(Produit $produit) 
    {
+       // Manager
        // your logic for publishing book or/and eg. return your custom data
+       //que
    } 
 
 } 
