@@ -32,7 +32,7 @@ class ClientsFixtures extends Fixture
             $client = (new Client())
             ->setEmail($faker->email);
             if ($client === 1) {
-                $client->setRoles(['ROLE_ADMIN']); //1 client role admin
+                $client->setRoles(['ROLE_ADMIN']); //1 client role admin 
             }
             $client->setRoles(['ROLE_USER'])
             ->setPassword($this->clientPasswordEncoder->encodePassword($client, 'identique'));

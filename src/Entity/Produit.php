@@ -7,6 +7,8 @@ use App\Entity\Traits\Ressourceid;
 use App\Entity\Traits\Timestampable;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
@@ -21,12 +23,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  }, 
  *  "patch"={
  *      "method"="PATCH",
- *      "path"="/produit/update/{id}",
+ *      "path"="/produit/{id}/update",
  *      "controller"="UpdateProduit::class",
  * },
  *  "delete"={
  *      "method"="DELETE",
- *      "path"="/produit/delete/{id}",
+ *      "path"="/produit/{id}/delete",
  *      "controller"="DeleteProduit::class",
  * }}
  * )
@@ -38,18 +40,23 @@ class Produit
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min = 3, max = 50)
+     * @Assert\Unique
      * @Groups({"produit_read"}, {"produit_detail_read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Unique
+     * @Assert\Length(min = 3, max = 20)
      * @Groups({"produit_read"}, {"produit_detail_read"})
      */
     private $model;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min = 3, max = 400)
      * @Groups({"produit_read"}, {"produit_detail_read"})
      */
     private $description;
