@@ -18,9 +18,26 @@ use symfony\Component\Validator as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
  * @ORM\HasLifecycleCallbacks
  * @ApiResource(
- *  collectionOperations={"get"={"normalization_context"={"client_read"}}, "post"={"denormalization_context"={"client_write"}}},
- *  itemOperations={"get"={"normalization_context"={"client_detail_read"}}, 
- *   "put"={"denormalization_context"={"client_detail_write"}}, "patch", "delete"}
+ *  collectionOperations={},
+ *  itemOperations={
+ *  "get"={
+ *      "normalization_context"={"client_detail_read"},
+ *      "method"="GET",
+ *      "path"="/clients/{id}/user",
+ *      "controller"="CreateUser::class",
+ *  },
+ *  "post"={
+ *      "denormalization_context"={"client_write"},
+ *      "method"="POST",
+ *      "path"="/clients/{id}/user/{user_id}",
+ *      "controller"="CreateUser::class",
+ *  }, 
+ *  "delete"={
+ *      "method"="DELETE",
+ *      "path"="/clients/{id}/user",
+ *      "controller"="DeleteUser::class",
+ *  },
+ * }
  * )
  */
 class Client implements UserInterface, PasswordAuthenticatedUserInterface

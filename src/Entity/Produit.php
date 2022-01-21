@@ -14,23 +14,25 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
  * @ORM\HasLifecycleCallbacks
  * @ApiResource(
- *  collectionOperations={"get"={"normalization_context"={"produit_read"}}, "post"},
- *  itemOperations={"get"={"normalization_context"={"produit_detail_read"}}, 
+ *  collectionOperations={
+ * "get"={
+ * "normalization_context"={"produit_read"},
+ *      "method"="GET",
+ *      "path"="/collection/produits"
+ * },
+ * "post"
+ * },
+ *  itemOperations={
+ * "get"={
+ * "normalization_context"={"produit_detail_read"},
+ *      "method"="GET",
+ *      "path"="/produit/{id}"
+ * }, 
  *  "post"={
  *      "method"="POST",
  *      "path"="/produit/create",
  *      "controller"="CreateProduit::class",
- *  }, 
- *  "patch"={
- *      "method"="PATCH",
- *      "path"="/produit/{id}/update",
- *      "controller"="UpdateProduit::class",
- * },
- *  "delete"={
- *      "method"="DELETE",
- *      "path"="/produit/{id}/delete",
- *      "controller"="DeleteProduit::class",
- * }}
+ *  }}
  * )
  */
 class Produit

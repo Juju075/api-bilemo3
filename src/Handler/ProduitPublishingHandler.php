@@ -6,7 +6,7 @@ use App\Entity\Produit;
 class ProduitPublishingHandler {
    
     /**
-     * Undocumented function
+     * Query d'insertion de $data
      *
      * @param Produit $produit
      * @return array

@@ -37,8 +37,12 @@ class CreateProduit extends AbstractController
      */    
     public function __invoke(Produit $data): Produit //tente d'appeler un objet comme une fonction.
     {
+
+        //recuperer le json et l'hydrater
+        //id et datetime autogenere
+        //tous les champs son non null (obligatoire) name model description price 
         dd($data);
-        $this->bookPublishingHandler->handle($data);
+        $this->produitPublishingHandler->handle($data);
         return $data;
     }
 }
