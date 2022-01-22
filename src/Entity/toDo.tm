@@ -31,7 +31,7 @@ http://127.0.0.1:8000/
 
 [ok] GET    api/client/{id}/users   [ok]load UsersFixtures
 [1]  GET    api/client/{id}/user/{user_id}
-[1]  POST   api/client/{id}/user   bundel sensio autogere id  avoir
+[1]  POST   api/client/{id}/user   bundele sensio autogere id  avoir
 [ok] DELETE api/client/{id}/users
 
 
