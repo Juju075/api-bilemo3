@@ -20,7 +20,7 @@ class ProduitsFixtures extends Fixture
         //admin vas cree 30 produits
         for ($nbProduit=0; $nbProduit < 25 ; $nbProduit++) { 
         $produit = (new Produit())
-        ->setName($faker->name)
+        ->setName($faker->realText(100))
         ->setModel($faker->sentence)
         ->setDescription($faker->realTextBetween(160, 200))
         ->setPrice($faker->randomFloat(2, 450, 2000))
