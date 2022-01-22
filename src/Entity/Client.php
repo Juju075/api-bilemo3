@@ -36,7 +36,7 @@ use symfony\Component\Validator as Assert;
  *  "post"={
  *      "denormalization_context"={"client_write"},
  *      "method"="POST",
- *      "path"="/clients/{id}/user/{user_id}",
+ *      "path"="/clients/{id}/user",
  *      "controller"="CreateUser::class",
  *  }, 
  *  "delete"={

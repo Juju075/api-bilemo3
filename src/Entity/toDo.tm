@@ -30,8 +30,8 @@ ok si valide sur Postman
 http://127.0.0.1:8000/
 
 [ok] GET    api/client/{id}/users   [ok]load UsersFixtures
-[1]  GET    api/client/{id}/user/{user_id}
-[1]  POST   api/client/{id}/user   sensio/framework-extra-bundle autogere id  avoir
+[1]  GET    api/client/{id}/user/{user_id}  >> 2 params
+[1]  POST   api/client/{id}/user   >> new user param client{id}
 [ok] DELETE api/client/{id}/users
 
 
