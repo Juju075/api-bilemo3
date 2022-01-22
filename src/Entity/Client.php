@@ -25,8 +25,7 @@ use symfony\Component\Validator as Assert;
  *  "get"={
  *      "normalization_context"={"client_detail_read"},
  *      "method"="GET",
- *      "path"="/clients/{id}/user",
- *      "controller"="CreateUser::class",
+ *      "path"="/client/{id}/users"
  *  },
  *  "post"={
  *      "denormalization_context"={"client_write"},

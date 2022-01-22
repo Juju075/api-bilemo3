@@ -9,7 +9,7 @@
 [1/2]Entete titre et description de l'Api
 
 ==============================
-90% - Fixture add user lié a des clients
+100% - Fixture add user lié a des clients
 4 clients au total ds la bdd getReference()
 UsersFixtures.testsPHP
 chaque client possede entre 3 et 12 utilisateurs
@@ -31,7 +31,7 @@ http://127.0.0.1:8000/
 
 [ok] GET    api/collection/produits 
 [ok] GET    api/produit/{id}
-[1]  GET    api/client/{id}/user   [ ]load UsersFixtures pb reference Client
+[pk] GET    api/client/{id}/users   [ok]load UsersFixtures
 [1]  DELETE api/clients/{id}/user
 [1]  POST   api/clients/{id}/user   bundel sensio autogere id  avoir
 [1]  GET    api/client/{id}/users/{user_id}
