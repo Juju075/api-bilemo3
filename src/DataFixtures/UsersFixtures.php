@@ -21,6 +21,7 @@ class UsersFixtures extends Fixture
          //pour chaque client [4] on cree entre 5 et 12 utilisateurs. foreign key  >>>  client_id dans user
          foreach ($clients as $value) {
              $idClient = $this->getReference('client_'.$value); // fait ref a l'Obj
+             dd($idClient);
              
             for ($nbUser=0; $nbUser < random_int(3,12); $nbUser++) { 
                 $user = (new User())
