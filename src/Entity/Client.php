@@ -35,8 +35,7 @@ use symfony\Component\Validator as Assert;
  *  }, 
  *  "delete"={
  *      "method"="DELETE",
- *      "path"="/clients/{id}/user",
- *      "controller"="DeleteUser::class",
+ *      "path"="/client/{id}/users",
  *  },
  * }
  * )
