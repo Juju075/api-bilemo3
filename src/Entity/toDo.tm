@@ -31,10 +31,10 @@ http://127.0.0.1:8000/
 
 [ok] GET    api/collection/produits 
 [ok] GET    api/produit/{id}
-[pk] GET    api/client/{id}/users   [ok]load UsersFixtures
-[1]  DELETE api/clients/{id}/user
-[1]  POST   api/clients/{id}/user   bundel sensio autogere id  avoir
-[1]  GET    api/client/{id}/users/{user_id}
+[ok] GET    api/client/{id}/users   [ok]load UsersFixtures
+[ok] DELETE api/client/{id}/users
+[1]  POST   api/client/{id}/user   bundel sensio autogere id  avoir
+[1]  GET    api/client/{id}/user/{user_id}
 
 avec token.
 
