@@ -27,19 +27,22 @@ class ClientsFixtures extends Fixture
 
         $faker = Faker\Factory::create();
         //creation de 10 utilisateurs
-        for ($nbUsers = 0; $nbUsers < 4 ; $nbUsers++) { 
+        for ($nbClients = 0; $nbClients < 4 ; $nbClients++) { 
 
             $client = (new Client())
             ->setEmail($faker->email);
+
             if ($client === 1) {
                 $client->setRoles(['ROLE_ADMIN']); //1 client role admin 
+                $manager->persist($client);
+                $this->addReference('client_'. $nbClients, $client);
             }
             $client->setRoles(['ROLE_USER'])
             ->setPassword($this->clientPasswordEncoder->encodePassword($client, 'identique'));
             //$this->addReference($className . '_' . $i, $entity)
             //dates creation 
             $manager->persist($client);
-
+            $this->addReference('client_'. $nbClients, $client);
         } 
         $manager->flush();
     }

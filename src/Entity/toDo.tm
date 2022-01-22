@@ -1,15 +1,23 @@
-Apiplatform methods >> Operation
-pas besoins de personnalise pris en charge auto par le bundle?
+90% - diagrammes
 
-CRUD
-Operations
-API Platform Core relies on the concept of operations. 
-Operations can be applied to a resource exposed by the API. 
-From an implementation point of view, 
-an operation is a link between a resource, 
-a route and its related controller.
+[1]- use case
+[1]- diag de class
+[1]- model relationnel
+[ ]- diag de sequence (ajouter un user lié)
 
 ==============================
+[1/2]Entete titre et description de l'Api
+
+==============================
+90% - Fixture add user lié a des clients
+4 clients au total ds la bdd getReference()
+UsersFixtures.testsPHP
+chaque client possede entre 3 et 12 utilisateurs
+utilisateur ( prenom et nom )
+
+==============================
+Faire les endpoint validé en mentorat
+
 [1]Consulter la liste des produits BileMo:                                                              GET collection/produits
 [1]Consulter la liste des utilisateurs inscrits liés à un client sur le site web: GET clients      >>>  GET api/client/{id}/user
 [1]Consulter les détails d’un produit BileMo:                                                           GET /produit/{id}
@@ -18,18 +26,28 @@ a route and its related controller.
 [1]Supprimer un utilisateur ajouté par un client:                                                       DELETE api/clients/{id}/user
 
 
-[ok] GET    api/collection/produits
-[1]  GET    api/produit/{id}
+ok si valide sur Postman
+http://127.0.0.1:8000/
+
+[ok] GET    api/collection/produits 
+[ok] GET    api/produit/{id}
 [1]  GET    api/client/{id}/user
 [1]  DELETE api/clients/{id}/user
 [1]  POST   api/clients/{id}/user   bundel sensio autogere id  avoir
 [1]  GET    api/client/{id}/users/{user_id}
 
+avec token.
+
 ==============================
 Ameliorer la documentation swagger
+OpenApi
+https://api-platform.com/docs/core/openapi/
+
 - nom des fonctions
 - parametres des fonctions
 
+==============================
+Operation POST custom controller
 
 CreateProduit::class
 
@@ -41,3 +59,22 @@ CreateProduit::class
   "createdAt": "CURRENT_TIMESTAMP",
   "updatedAt": "CURRENT_TIMESTAMP"
 }
+
+==============================
+Login JWToken configuration et test
+api/login$ postman
+
+{
+    "username": "prosacco.patricia@walsh.com",
+    "password": "identique"
+ }
+
+==============================
+Ecrire des testsPHP Unit
+Enrironnement de test a mettre en place
+
+login
+creation user
+delete user
+
+==============================

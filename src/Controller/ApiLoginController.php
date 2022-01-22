@@ -12,7 +12,7 @@ class ApiLoginController extends AbstractController
 {
      /**
       * Recois les credentials 
-      * @Route("/api/login", name="api_login", methods={"GET", "POST"})
+      * @Route("/api/login", name="api_login", methods={"POST"})
       * @return Response
       */
     public function index(?Client $client): Response
