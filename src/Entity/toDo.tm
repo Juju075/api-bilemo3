@@ -29,12 +29,18 @@ Faire les endpoint validé en mentorat
 ok si valide sur Postman
 http://127.0.0.1:8000/
 
+[ok] GET    api/client/{id}/users   [ok]load UsersFixtures
+[1]  GET    api/client/{id}/user/{user_id}
+[1]  POST   api/client/{id}/user   bundel sensio autogere id  avoir
+[ok] DELETE api/client/{id}/users
+
+
 [ok] GET    api/collection/produits 
 [ok] GET    api/produit/{id}
-[ok] GET    api/client/{id}/users   [ok]load UsersFixtures
-[ok] DELETE api/client/{id}/users
-[1]  POST   api/client/{id}/user   bundel sensio autogere id  avoir
-[1]  GET    api/client/{id}/user/{user_id}
+
+
+
+
 
 avec token.
 

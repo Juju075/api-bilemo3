@@ -20,13 +20,14 @@ use symfony\Component\Validator as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
  * @ORM\HasLifecycleCallbacks
  * @ApiResource(
- *  collectionOperations={},
- *  itemOperations={
+ *  collectionOperations={
  *  "get"={
  *      "normalization_context"={"client_detail_read"},
  *      "method"="GET",
  *      "path"="/client/{id}/users"
  *  },
+ * },
+ *  itemOperations={
  *    "get"={
  *      "normalization_context"={"client_detail_read"},
  *      "method"="GET",
