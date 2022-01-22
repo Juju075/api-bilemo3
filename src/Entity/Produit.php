@@ -21,20 +21,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  * "normalization_context"={"produit_read"},
  *      "method"="GET",
  *      "path"="/collection/produits"
- * },
- * "post"
- * },
+ * }},
  *  itemOperations={
  * "get"={
  * "normalization_context"={"produit_detail_read"},
  *      "method"="GET",
  *      "path"="/produit/{id}"
- * }, 
- *  "post"={
- *      "method"="POST",
- *      "path"="/produit/create",
- *      "controller"="CreateProduit::class",
- *  }}
+ * }}
  * )
  */
 class Produit
