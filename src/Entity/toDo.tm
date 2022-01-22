@@ -31,7 +31,7 @@ http://127.0.0.1:8000/
 
 [ok] GET    api/collection/produits 
 [ok] GET    api/produit/{id}
-[1]  GET    api/client/{id}/user
+[1]  GET    api/client/{id}/user   [ ]load UsersFixtures pb reference Client
 [1]  DELETE api/clients/{id}/user
 [1]  POST   api/clients/{id}/user   bundel sensio autogere id  avoir
 [1]  GET    api/client/{id}/users/{user_id}
