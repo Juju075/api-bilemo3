@@ -29,3 +29,4 @@ class CreateUserController extends AbstractController
         return $data;
     }
 }
+

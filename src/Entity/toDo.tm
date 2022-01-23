@@ -49,19 +49,44 @@ Ameliorer la documentation swagger
 OpenApi
 https://api-platform.com/docs/core/openapi/
 
-- nom des fonctions
-- parametres des fonctions
+use ApiProperty  openapi_context
+
+- nom des fonctions.
+- parametres des fonctions.
 
 ==============================
-Operation POST custom controller
+Operation (Ajout d'un utilisateur à 1 client.)
+POST /api/clients/{id}/user      
+Param: 43  >> 
+| "client": "string", | client_id
+| "userproduct": { "user": [ "string" "produit": "string" |
+date autogener
 
-CreateProduit::class
+Body:
+application/json
+>>>> event hass
 
 {
-  "name": "string",
-  "model": "string",
-  "description": "string",
-  "price": 0,
+  "email": "test@gmail.com",
+  "roles": [
+    "ROLE_USER"
+  ],
+  "password": "identique",
+  "users": [
+    {
+      "prenom": "prenomtest",
+      "nom": "nomtest",
+      "client": "string",
+      "userproduct": {
+        "user": [
+          "string"
+        ],
+        "produit": "string"
+      },
+      "createdAt": "CURRENT_TIMESTAMP",
+      "updatedAt": "CURRENT_TIMESTAMP"
+    }
+  ],
   "createdAt": "CURRENT_TIMESTAMP",
   "updatedAt": "CURRENT_TIMESTAMP"
 }

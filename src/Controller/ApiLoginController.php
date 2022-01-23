@@ -32,7 +32,7 @@ class ApiLoginController extends AbstractController
       }
       dd($request);
        //recuperer le API token genere normalement c dans la Request  
-       $token = $request; // somehow create an API token for $user
+       $token = null; // somehow create an API token for $user
 
 
       return $this->json([

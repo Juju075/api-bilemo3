@@ -12,6 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use symfony\Component\Validator as Assert;
+use ApiPlatform\Core\Annotation\ApiProperty;
 
 //"access_control"="is_granted('ROLE_ADMIN')"
 // "put"={"denormalization_context"={"client_detail_write"}}, "patch", "delete"}
