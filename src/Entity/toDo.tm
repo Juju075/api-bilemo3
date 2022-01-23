@@ -29,10 +29,10 @@ Faire les endpoint validé en mentorat
 ok si valide sur Postman
 http://127.0.0.1:8000/
 
-[ok] GET    api/client/{id}/users   [ok]load UsersFixtures
-[1]  GET    api/client/{id}/user/{user_id}  >> 2 params
-[1]  POST   api/client/{id}/user   >> new user param client{id}
-[ok] DELETE api/client/{id}/users
+[ok] GET    api/client/{id}/users   [ok]load UsersFixtures.
+[1]  GET    api/client/{id}/user/{user_id}  >> Documentation 2 params.
+[1]  POST   api/client/{id}/user   Custom Operation >> Grosse erreur de documentation à recrire $client->addUser()
+[ok] DELETE api/client/{id}/users 
 
 
 [ok] GET    api/collection/produits 
@@ -68,12 +68,28 @@ CreateProduit::class
 
 ==============================
 Login JWToken configuration et test
-api/login$ postman
+api/login postman
 
-{
+{² "é5TBRqs
     "username": "prosacco.patricia@walsh.com",
     "password": "identique"
  }
+
+==============================
+[1] Login ApiLoginController.php
+api/login
+
+Security componet Auth user (Json login)
+https://symfony.com/doc/current/security.html#json-login
+
+
+
+
+Expected:
+{
+    "user": "dunglas@example.com",
+    "token": "45be42..."
+}
 
 ==============================
 Ecrire des testsPHP Unit
