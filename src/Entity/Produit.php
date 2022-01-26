@@ -64,15 +64,7 @@ class Produit
      */
     private $price;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Userproduct::class, mappedBy="produit")
-     */
-    private $userproducts;
 
-    public function __construct()
-    {
-        $this->userproducts = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -123,36 +115,6 @@ class Produit
     public function setPrice(float $price): self
     {
         $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Userproduct[]
-     */
-    public function getUserproducts(): Collection
-    {
-        return $this->userproducts;
-    }
-
-    public function addUserproduct(Userproduct $userproduct): self
-    {
-        if (!$this->userproducts->contains($userproduct)) {
-            $this->userproducts[] = $userproduct;
-            $userproduct->setProduit($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUserproduct(Userproduct $userproduct): self
-    {
-        if ($this->userproducts->removeElement($userproduct)) {
-            // set the owning side to null (unless already changed)
-            if ($userproduct->getProduit() === $this) {
-                $userproduct->setProduit(null);
-            }
-        }
 
         return $this;
     }

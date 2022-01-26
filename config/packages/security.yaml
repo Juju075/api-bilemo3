@@ -1,16 +1,13 @@
 security:
-  encoders:
+  password_hashers:
+    Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: "auto"
     App\Entity\Client:
       algorithm: auto
 
   enable_authenticator_manager: true
-  # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
-  password_hashers:
-    Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: "auto"
-    App\Entity\Client:
-    algorithm: auto
 
   # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+
   providers:
     # used to reload user from session & other features (e.g. switch_user)
     app_user_provider:
@@ -35,25 +32,9 @@ security:
       stateless: true
       jwt: ~
 
-    main:
-      lazy: true
-      provider: app_user_provider
-
-    clients:
-      pattern: ^/api/clients
-      methods: [PUT, PATCH, DELETE]
-      stateless: true
-      guard:
-        authenticators:
-          - lexik_jwt_authentication.jwt_token_authenticator
-
-    produits:
-      pattern: ^/api/produits
-      methods: [POST, PUT, PATCH, DELETE]
-      stateless: true
-      guard:
-        authenticators:
-          - lexik_jwt_authentication.jwt_token_authenticator
+    doc:
+      pattern: ^/api/doc
+      security: false
 
   # activate different ways to authenticate
   # https://symfony.com/doc/current/security.html#the-firewall
@@ -65,19 +46,10 @@ security:
   # Note: Only the *first* access control that matches will be used
 
   access_control:
+    #- { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+    - { path: ^/api/doc, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
     - { path: ^/api/login, roles: PUBLIC_ACCESS }
-    - {
-        path: ^/api/clients,
-        roles: IS_AUTHENTICATED_FULLY,
-        methods: [PUT, PATCH, DELETE],
-      }
-    - {
-        path: ^/api/produits,
-        roles: IS_AUTHENTICATED_FULLY,
-        methods: [POST, PUT, PATCH, DELETE],
-      }
-
-  #- { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
   security:

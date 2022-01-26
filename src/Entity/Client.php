@@ -38,7 +38,7 @@ use ApiPlatform\Core\Annotation\ApiProperty;
  *      "denormalization_context"={"client_write"},
  *      "method"="POST",
  *      "path"="/clients/{id}/user",
- *      "controller"="CreateUser::class",
+ *      "controller"="CreateUserController::class",
  *  }, 
  *  "delete"={
  *      "method"="DELETE",

@@ -2,6 +2,8 @@
 declare(strict_types = 1); 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\Ressourceid;
 use App\Entity\Traits\Timestampable;
@@ -32,10 +34,16 @@ class User
      */
     private $client;
 
+
     /**
-     * @ORM\ManyToOne(targetEntity=Userproduct::class, inversedBy="user")
+     * @ORM\ManyToMany(targetEntity=Produit::class)
      */
-    private $userproduct;
+    private $products;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
 
     public function getPrenom(): ?string
@@ -74,14 +82,27 @@ class User
         return $this;
     }
 
-    public function getUserproduct(): ?Userproduct
+
+    /**
+     * @return Collection|Produit[]
+     */
+    public function getProducts(): Collection
     {
-        return $this->userproduct;
+        return $this->products;
     }
 
-    public function setUserproduct(?Userproduct $userproduct): self
+    public function addProduct(Produit $product): self
     {
-        $this->userproduct = $userproduct;
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Produit $product): self
+    {
+        $this->products->removeElement($product);
 
         return $this;
     }

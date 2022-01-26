@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types = 1); 
 namespace App\Controller;
 
 
@@ -23,22 +23,9 @@ class ApiLoginController extends AbstractController
    * @param Request $request
    * @return JsonResponse
    */  
-    public function index(?Client $client, Request $request): JsonResponse
+    public function index(?Client $client)
     {
-      if (null === $client) {
-         return $this->json([
-         'message' => 'missing credentials',
-         ], Response::HTTP_UNAUTHORIZED);
-      }
-      dd($request);
-       //recuperer le API token genere normalement c dans la Request  
-       $token = null; // somehow create an API token for $user
-
-
-      return $this->json([
-         'client'  => $client->getUserIdentifier(),
-         'token' => $token,
-      ]);
+     //..
     }
 }
 
