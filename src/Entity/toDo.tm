@@ -139,8 +139,6 @@ Security componet Auth user (Json login)
 https://symfony.com/doc/current/security.html#json-login
 
 
-
-
 Expected:
 {
     "user": "dunglas@example.com",
@@ -148,6 +146,13 @@ Expected:
 }
 
 ==============================
+Autodecouvrable (niv3)
+==============================
+Documentation
+==============================
+
+
+
 Ecrire des testsPHP Unit
 Enrironnement de test a mettre en place
 
@@ -155,4 +160,3 @@ login  status
 Create status 201
 Delete status 201
 
-==============================
