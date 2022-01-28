@@ -147,6 +147,7 @@ Expected:
 
 ==============================
 Autodecouvrable (niv3)
+https://github.com/willdurand/Hateoas
 ==============================
 Documentation
 ==============================
