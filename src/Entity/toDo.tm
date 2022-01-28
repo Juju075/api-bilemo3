@@ -3,13 +3,18 @@
 [1]- use case
 [1]- diag de class
 [1]- model relationnel
-[ ]- diag de sequence (ajouter un user lié)
+[1]- diag de sequence (ajouter un user lié)
+
+ATTENTION SECURITE
+- doit etre connecté
+- doit etre identifié comme Administrateur lié à la requete.
+- Interdire les doublons (verif unique email user)
 
 ==============================
 [1/2]Entete titre et description de l'Api
 
 ==============================
-100% - Fixture add user lié a des clients
+100% - Fixture add user lié à des clients (ManyToMany)
 4 clients au total ds la bdd getReference()
 UsersFixtures.testsPHP
 chaque client possede entre 3 et 12 utilisateurs
@@ -32,13 +37,15 @@ http://127.0.0.1:8000/
 
 [ok] GET    api/client/{id}/users   [ok]load UsersFixtures.
 [1]  GET    api/client/{id}/user/{user_id}  >> Documentation 2 params.
-[1]  POST   api/client/{id}/user   Custom Operation >> Grosse erreur de documentation à recrire $client->addUser()
+[1]  POST   api/client/{id}/user   Custom Operation >> Grosse erreur de documentation à recrire $client->addUser()  FAIRE UN CONTROLLEUR
 [ok] DELETE api/client/{id}/users 
 
 
 [ok] GET    api/collection/produits 
 [ok] GET    api/produit/{id}
-
+==============================
+Risque de securité Client dans la reponse.
+Affichage du password
 ==============================
 Login_check
 http://127.0.0.1:8000/api/login_check

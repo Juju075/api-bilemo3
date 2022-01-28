@@ -18,7 +18,6 @@ class UsersFixtures extends Fixture
         foreach ($clients as $value) {
 
             $Objclient = $this->getReference('client_'.$value);
-            $clientId = $Objclient->getId();
 
                 for ($nbUser=0; $nbUser < 4; $nbUser++) { 
                     $user = (new User())

@@ -34,7 +34,7 @@ use ApiPlatform\Core\Annotation\ApiProperty;
  *      "method"="GET",
  *      "path"="/client/{id}/user/{user_id}"
  *  },
- *  "post"={
+ *  "Add_User"={
  *      "denormalization_context"={"client_write"},
  *      "method"="POST",
  *      "path"="/clients/{id}/user",

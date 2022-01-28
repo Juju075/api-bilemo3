@@ -11,13 +11,15 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
+/**
+ * Ce controlleur est factice il n'est pas appeler.
+ */
 class ApiLoginController extends AbstractController
 {
 
    //Your controller creates the correct response:
 
    /**
-   * Recois les credentials 
    * @Route("/api/login", name="api_login", methods={"POST"})
    * @param Client|null $client
    * @param Request $request

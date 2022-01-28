@@ -1,6 +1,6 @@
 api_platform:
   title: "API Bilemo 2022"
-  description: "description ici."
+  description: "Cette API permet d'acceder au catalogue produits de Bilemo."
   version: "1.0.0"
   mapping:
     paths: ["%kernel.project_dir%/src/Entity"]
