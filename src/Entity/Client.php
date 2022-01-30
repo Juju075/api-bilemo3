@@ -11,6 +11,10 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation;
+
 use symfony\Component\Validator as Assert;
 use ApiPlatform\Core\Annotation\ApiProperty;
 
@@ -18,35 +22,43 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 // "put"={"denormalization_context"={"client_detail_write"}}, "patch", "delete"}
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
- * @ORM\HasLifecycleCallbacks
- * @ApiResource(
- *  collectionOperations={
- *  "get"={
- *      "normalization_context"={"client_detail_read"},
- *      "method"="GET",
- *      "path"="/client/{id}/users"
- *  },
- * },
- *  itemOperations={
- *    "get"={
- *      "normalization_context"={"client_detail_read"},
- *      "method"="GET",
- *      "path"="/client/{id}/user/{user_id}"
- *  },
- *  "Add_User"={
- *      "denormalization_context"={"client_write"},
- *      "method"="POST",
- *      "path"="/clients/{id}/user",
- *      "controller"="CreateUserController::class",
- *  }, 
- *  "delete"={
- *      "method"="DELETE",
- *      "path"="/client/{id}/users",
- *  },
- * }
- * )
- */
+* @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
+* @ORM\HasLifecycleCallbacks
+* 
+* @Serializer\XmlRoot("client")
+* @Hateoas\Relation(
+* "self", 
+* href = "expr('/api/client/' ~ object.getId())"
+* )
+* 
+* @ApiResource(
+*  collectionOperations={
+*  "get"={
+*      "normalization_context"={"client_detail_read"},
+*      "method"="GET",
+*      "path"="/client/{id}/users"
+*  }},
+*  itemOperations={
+*    "User_detail"={
+*      "normalization_context"={"client_detail_read"},
+*      "method"="GET",
+*      "path"="/client/{id}/user/{user_id}",
+*      "openapi_context"= {"summary"="Display details on specific Client' user", "description"="2 parameters are required to perform this request."},
+*  },
+*  "Add_User"={
+*      "denormalization_context"={"client_write"},
+*      "method"="POST",
+*      "path"="/client/{id}/user",
+*      "controller"="CreateUserController::class",
+*      "openapi_context"= {"summary"="Add a new User to a specific Client", "description"="Choice the Client identifer which add a new User."},
+*  }, 
+*  "delete"={
+*      "method"="DELETE",
+*      "path"="/client/{id}/users",
+*      "openapi_context"= {"summary"="Delete a specific Client ressource", "description"="description ici"},
+* },
+*})
+*/
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use Timestampable;  
@@ -199,3 +211,5 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 }
+
+

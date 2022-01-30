@@ -63,9 +63,22 @@ OpenApi
 https://api-platform.com/docs/core/openapi/
 
 use ApiProperty  openapi_context
+Decorate 
 
-- nom des fonctions.
-- parametres des fonctions.
+[ok]Titre & description des operations.
+[ ]Parametres
+[ ]Request Body
+[ ]Response
+[ ]Schema
+
+Pour les Operation non utilise (les retirer correctement)
+Supprimer correctement les routes Not found
+
+"get"={
+"controller"="NotFoundAction ::class",
+"read"="false",
+"output"="false",
+ }
 
 ==============================
 Operation (Ajout d'un utilisateur à 1 client.)
@@ -146,7 +159,7 @@ Expected:
 }
 
 ==============================
-Autodecouvrable (niv3)
+Autodecouvrable (Maturite Niv3)
 https://github.com/willdurand/Hateoas
 ==============================
 Documentation

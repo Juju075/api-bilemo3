@@ -2,33 +2,41 @@
 declare(strict_types = 1); 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\Ressourceid;
 use App\Entity\Traits\Timestampable;
 use ApiPlatform\Core\Annotation\ApiResource;
+
+use ApiPlatform\Core\Annotation\ApiProperty;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
  * @ORM\HasLifecycleCallbacks
+ * 
+ * 
  * @ApiResource(
  *  collectionOperations={
  * "get"={
  * "normalization_context"={"produit_read"},
  *      "method"="GET",
- *      "path"="/collection/produits"
+ *      "path"="/collection/produits",
+ *      "openapi_context"= {"summary"="Display all products", "description"="Any parameters are required to perform this action."},
  * }},
  *  itemOperations={
  * "get"={
  * "normalization_context"={"produit_detail_read"},
  *      "method"="GET",
- *      "path"="/produit/{id}"
+ *      "path"="/produit/{id}",
+ *      "openapi_context"= {"summary"="Display specific product detail", "description"="description ici"},
  * }}
  * )
+ * 
+
  */
 class Produit
 {
@@ -36,11 +44,13 @@ class Produit
     use Ressourceid;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min = 3, max = 50)
-     * @Assert\Unique
-     * @Groups({"produit_read"}, {"produit_detail_read"})
-     */
+    * @ORM\Column(type="string", length=255)
+    * @Assert\Length(min = 3, max = 50)
+    * @Assert\Unique
+    * @Groups({"produit_read"}, {"produit_detail_read"})
+    * @ApiProperty(
+    *     openapiContext={"required"=true, "minLength"=4, "example"="some example text"})
+    */
     private $name;
 
     /**

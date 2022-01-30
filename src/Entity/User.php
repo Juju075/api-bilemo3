@@ -12,6 +12,8 @@ use symfony\Component\Validator as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\HasLifecycleCallbacks
+ * 
  */
 class User
 {
@@ -107,3 +109,4 @@ class User
         return $this;
     }
 }
+
