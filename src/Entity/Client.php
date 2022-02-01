@@ -208,6 +208,23 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * Called by "/api/client/{id}/user"
+     * Check if this client is the ressource owner.(Authorization to create.)
+     *
+     * @param integer $id
+     * @return boolean
+     */
+    public function isIdentical( int $id): bool
+    {
+        //compare {id} et getId
+        if ($id === $this->getId()) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 
 

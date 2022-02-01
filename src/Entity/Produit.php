@@ -11,7 +11,6 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
-use Hateoas\Configuration\Annotation as Hateoas;
 
 
 /**
@@ -59,7 +58,7 @@ class Produit
      * @Assert\Length(min = 3, max = 20)
      * @Groups({"produit_read"}, {"produit_detail_read"})
      */
-    private $model;
+    private $model; 
 
     /**
      * @ORM\Column(type="string", length=255)
