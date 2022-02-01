@@ -11,7 +11,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use symfony\Component\Validator as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks
  * 
  */

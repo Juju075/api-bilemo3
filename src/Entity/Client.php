@@ -14,6 +14,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use JMS\Serializer\Annotation as Serializer;
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 use symfony\Component\Validator as Assert;
 use ApiPlatform\Core\Annotation\ApiProperty;
@@ -23,13 +24,9 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 
 /**
 * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
+* @UniqueEntity(fields={"email"}, message="There is already an account with this email")
 * @ORM\HasLifecycleCallbacks
 * 
-* @Serializer\XmlRoot("client")
-* @Hateoas\Relation(
-* "self", 
-* href = "expr('/api/client/' ~ object.getId())"
-* )
 * 
 * @ApiResource(
 *  collectionOperations={
@@ -60,7 +57,6 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 * },
 *})
 */
-
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use Timestampable;  

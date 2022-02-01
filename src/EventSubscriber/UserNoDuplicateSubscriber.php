@@ -2,6 +2,7 @@
 
 namespace App\EventSubscriber;
 
+use App\Entity\User;
 use App\Repository\UserRepository;
 
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -28,13 +29,20 @@ class UserNoDuplicateSubscriber implements EventSubscriberInterface
      */
     public function verifCombinaison(ViewEvent $event)
     {
-        dd($event);
+        $controllerResult = $event->getControllerResult; 
+        dump($controllerResult);
+        $method = $event->getRequest()->getMethod(); 
 
-        $clientId = null;
-        $prenom = null;
-        $nom = null ;
+        if ($controllerResult instanceof User && $method === "POST") {
+            
+            $clientId = null;
+            $prenom = null;
+            $nom = null ;
+    
+          $exist = $userRepo->findOneBy(['client_id'=>$clientId, 'prenom'=>$prenom, 'nom'=>$nom]); //prenom et nom
+        }
 
-      $exist = $userRepo->findOneBy(['client_id'=>$clientId, 'prenom'=>$prenom, 'nom'=>$nom]); //prenom et nom
+
     }
 
     //Events de ApiPlatform    
@@ -42,7 +50,7 @@ class UserNoDuplicateSubscriber implements EventSubscriberInterface
     {
         //Allows to create a response for the return value of a controller.
         return [
-            //KernelEvents::VIEW => ['verifCombinaison', EventPriorities::PRE_WRITE]
+            KernelEvents::VIEW => ['verifCombinaison', EventPriorities::PRE_WRITE]
         ];
     }
 }

@@ -38,6 +38,7 @@ private $encoder;
         $controllerResult = $event->getControllerResult; //on capte le resultat du controller 
         $method = $event->getRequest()->getMethod(); //method 
 
+        //Important vas cibler uniquement un POST sur l'entité Client.    
         if ($controllerResult instanceof Client && $method === "POST") {
            $hash = $this->encoder->encodePassword($controllerResult, $controllerResult->getPassword()); //Returns the password used to authenticate the user.
            $controllerResult->setPassword($hash);
