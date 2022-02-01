@@ -5,8 +5,7 @@ namespace App\Controller;
 use App\Entity\Client;
 use App\Entity\User;
 use App\Repository\UserRepository;
-
-
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
@@ -15,60 +14,56 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class CreateUserController extends AbstractController
 {
+    private $em;
+
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em =$em;
+    }
 
     // Verifiction autorisation (Client {id})  @isGranted  en Annotation
-    // Doit etre connecte  | 1-Recuperer le token 2-Le comparer 3-l'Autorise
-    //     
+    // Doit etre connecte  | isgranted client ok + Client correspond au {id} envoye.
+    //  @ Security("is_granted('ROLE_CLIENT') && client.isIdentical()")  + custom Voter
+
     /**
-     * Create new user  {user_id}
+     * Create new user 
      * 
-     * @Security("is_granted('ROLE_CLIENT') && client.isVerified()")
      * @Route("/api/client/{id}/user", name="app_create_user", methods={"POST"})
+     * @Security("is_granted('ROLE_CLIENT')")
      * @param Client $data
      * @return void
      */ 
-    public function __invoke(Client $data, Request $request, UserRepository $userRepo): Client //tente d'appeler un objet comme une fonction.
+    public function __invoke(Client $data, Request $request, UserRepository $userRepo, EntityManagerInterface $em): Client //tente d'appeler un objet comme une fonction.
     {
+        //404 - si $data not found return message json ('this ressource {id} don't exist')
+        // Oublie body Json Notice: Undefined index: prenom
 
-        dump($request); // client id 295
-
+        $saisie = json_decode($request->getContent(), true); 
         
+        //: Undefined property: Symfony\Component\HttpKernel\Event\ViewEvent::$getControllerResult
+        //
+        $exist = $userRepo->findOneBy(['id'=>$data->getId(), 'prenom'=>$saisie["prenom"], 'nom'=>$saisie["nom"]]);
+        dump($exist);
 
-        //recuperer le json dans le body key
-        $prenom = null;
-        $nom = null;
+        //Event UserNoDuplicateSubscriber (Contrainte)
 
-        // $user = (new User())
-        //     ->setPrenom($prenom)
-        //     ->setNom($nom);
+        $user = (new User())
+            ->setPrenom($saisie["prenom"])
+            ->setNom($saisie["nom"]);
 
-        //$data->addUser($user);
+        $data->addUser($user);
+
+        $em->persist($user);
+        $em->flush();
+
+        //[event] Subscriber: noDuplicateUser (Kernel.controller)
+        //persist & flush
 
 
-
-        // //Code HTTp 200 401 403 504
-
-        // // Verification Json Valide sinon trow exeption Deserialisation - Json en Obj (User)
-        // $user = null;
-        
-        // // Verification - Requete sql where client_id + prenom + nom si non trouve ok on continue.|| Ajouter les contrainte en annotation Constraint @Assert
-        // $dataId= null;
-        // $prenom =null;
-        // $nom=null;
-
-        // $userExist = $userRepo->findOneBy(["client_id"=>$dataId, "prenom"=>$prenom, "nom"=>$nom]);
-
-        // if (empty($userExist)) {
-        //     $this->$data->addUser($user);
-        //     return $data;
-        // }else{
-        //     //Message en Json 'This user already exist'
-
-        // }
+        //sinon exeption json
 
         return $data;
             

@@ -11,6 +11,7 @@ class OpenApiFactory implements OpenApiFactoryInterface
 {
     private $decorated;
 
+    //On doit modifier services.yaml pour overider le Factory par defaut   
     public function __construct(OpenApiFactoryInterface $decorated)
     {
         $this->decorated = $decorated;
@@ -18,7 +19,14 @@ class OpenApiFactory implements OpenApiFactoryInterface
 
     public function __invoke(array $context = []): OpenApi
     {
-        $openApi = $this->decorated->__invoke($context);
+        $openApi = $this->decorated->__invoke($context); //Specification openApi
+        dump($openApi);
+
+        //10:03    
+        foreach ($openApi->getPaths()->getPaths() as $path) {
+            dd($path);
+        }
+
         return $openApi;
     }
 }

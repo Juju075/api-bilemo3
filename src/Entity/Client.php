@@ -38,6 +38,7 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 *      "method"="GET",
 *      "path"="/client/{id}/users"
 *  }},
+*
 *  itemOperations={
 *    "User_detail"={
 *      "normalization_context"={"client_detail_read"},
@@ -59,6 +60,7 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 * },
 *})
 */
+
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use Timestampable;  
