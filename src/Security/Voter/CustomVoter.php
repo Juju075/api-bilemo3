@@ -8,12 +8,17 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class CustomVoter extends Voter
 {
+    /**
+     * est ce que le voter doit etre applique
+     *
+     * @param string $attribute de permission
+     * @param [type] $subject  l'Obj passe
+     * @return boolean
+     */
     protected function supports(string $attribute, $subject): bool
     {
-        // replace with your own logic
-        // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, ['POST_EDIT', 'POST_VIEW'])
-            && $subject instanceof \App\Entity\Custom;
+        return in_array($attribute, ['USER_CREATE'])
+            && $subject instanceof \App\Entity\User;
     }
 
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
@@ -25,15 +30,12 @@ class CustomVoter extends Voter
         }
 
         // ... (check conditions and return true to grant permission) ...
+        // Role client et ressource owner
         switch ($attribute) {
-            case 'POST_EDIT':
-                // logic to determine if the user can EDIT
-                // return true or false
+            case 'USER_CREATE':
+                return true;
                 break;
-            case 'POST_VIEW':
-                // logic to determine if the user can VIEW
-                // return true or false
-                break;
+
         }
 
         return false;

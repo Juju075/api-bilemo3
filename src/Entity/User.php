@@ -9,10 +9,12 @@ use App\Entity\Traits\Ressourceid;
 use App\Entity\Traits\Timestampable;
 use Symfony\Component\Serializer\Annotation\Groups;
 use symfony\Component\Validator as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks
+ * @UniqueEntity(fields={"prenom","nom"}, message="There is already an account with this fullname")
  * 
  */
 class User

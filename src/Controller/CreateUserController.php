@@ -4,9 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Client;
 use App\Entity\User;
-use App\Repository\UserRepository;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Serializer\Serializer;
 
 
 use Symfony\Component\HttpFoundation\Response;
@@ -21,51 +22,43 @@ class CreateUserController extends AbstractController
 
     public function __construct(EntityManagerInterface $em)
     {
-        $this->em =$em;
+        $this->em = $em;
     }
 
     // Verifiction autorisation (Client {id})  @isGranted  en Annotation
     // Doit etre connecte  | isgranted client ok + Client correspond au {id} envoye.
-    //  @ Security("is_granted('ROLE_CLIENT') && client.isIdentical()")  + custom Voter
+    //  @ Security("is_granted('ROLE_CLIENT') && client.isIdentical()")  
+    //ou applique un Custom Voter (USER_CREATE, data)
+    // @Security("is_granted('ROLE_CLIENT'))")
 
     /**
      * Create new user 
      * 
      * @Route("/api/client/{id}/user", name="app_create_user", methods={"POST"})
-     * @Security("is_granted('ROLE_CLIENT') && client.isIdentical({id})")
      * @param Client $data
-     * @return void
      */ 
-    public function __invoke(User $data, Request $request, UserRepository $userRepo, EntityManagerInterface $em): User//tente d'appeler un objet comme une fonction.
+    public function __invoke(Client $data, Request $request)//tente d'appeler un objet comme une fonction.
     {
-
         //404 - si $data not found return message json ('this ressource {id} don't exist')
         // Oublie body Json Notice: Undefined index: prenom
-        dd($data);
         $saisie = json_decode($request->getContent(), true); 
-        
-        //: Undefined property: Symfony\Component\HttpKernel\Event\ViewEvent::$getControllerResult
-        //
-        $exist = $userRepo->findOneBy(['id'=>$data->getId(), 'prenom'=>$saisie["prenom"], 'nom'=>$saisie["nom"]]);
-        dump($exist);
-
+    
         
         $user = (new User())
-        ->setPrenom($saisie["prenom"])
-        ->setNom($saisie["nom"]);
-        
+            ->setPrenom($saisie["prenom"])
+            ->setNom($saisie["nom"]);
+
+        //Validation de l'Obj
+
         $data->addUser($user);
         
-        $em->persist($user);
-        //Event UserNoDuplicateSubscriber (Kernel.view)
-        $em->flush();
+
+        $this->em->persist($user);
+        //$this->em->flush();
 
 
 
-
-        //sinon exeption json
-
-        return $data;
+        return new Response();
             
     }
 }

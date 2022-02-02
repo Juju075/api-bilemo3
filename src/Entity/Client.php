@@ -211,7 +211,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Called by "/api/client/{id}/user"
-     * Check if this client is the ressource owner.(Authorization to create.)
+     * For authorization purpose Check if this client is the ressource owner.
      *
      * @param integer $id
      * @return boolean
