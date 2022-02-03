@@ -22,11 +22,8 @@ class GetUserClientController extends AbstractController
     {
         //Gestion d'erreur.
         //404 throw exeption si user n'existe pas dans la list
-        //check user ds la list client
-
 
         $userSerialized = $serializer->serialize($user, 'json');
-        
         $response = new Response($userSerialized);
         $response->headers->set('Content-Type', 'application/json');
 

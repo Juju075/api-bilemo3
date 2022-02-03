@@ -8,7 +8,8 @@ use Symfony\Component\HttpKernel\Event\ViewEvent;
 use ApiPlatform\Core\EventListener\EventPriorities;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 
 
 class PassewordEncoderSubscriber implements EventSubscriberInterface
@@ -22,7 +23,7 @@ private $encoder;
      *
      * @param UserPasswordHasherInterface $encoder
      */
-    public function __construct(UserPasswordEncoderInterface $encoder)
+    public function __construct(UserPasswordHasherInterface $encoder)
     {
         $this->encoder = $encoder;
     }
@@ -35,21 +36,21 @@ private $encoder;
      */
     public function encodePassword(ViewEvent $event) //Kernel event 
     {
-        $controllerResult = $event->getControllerResult; //on capte le resultat du controller 
+        $controllerResult = $event->getControllerResult; //on capte le resultat du controller  Notice: Undefined property:
         $method = $event->getRequest()->getMethod(); //method 
 
         //Important vas cibler uniquement un POST sur l'entité Client.    
         if ($controllerResult instanceof Client && $method === "POST") {
-           $hash = $this->encoder->encodePassword($controllerResult, $controllerResult->getPassword()); //Returns the password used to authenticate the user.
+           //$hash = $this->encoder->encodePassword($controllerResult, $controllerResult->getPassword()); //Returns the password used to authenticate the user.
+           $hash = $this->encoder->hashPassword($controllerResult, $controllerResult->getPassword()); //Returns the password used to authenticate the user.
            $controllerResult->setPassword($hash);
         }
     }
 
-    //en hass avant l'insertion
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::VIEW => ['encodePassword', EventPriorities::PRE_WRITE],
+            //KernelEvents::VIEW => ['encodePassword', EventPriorities::PRE_WRITE],
         ];
         
     }

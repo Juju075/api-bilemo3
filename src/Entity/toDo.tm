@@ -113,31 +113,6 @@ client product ?
 
 Authorization:
 
-
-{
-  "email": "christop17@hotmail.com",
-  "roles": [
-    "ROLE_USER"
-  ],
-  "password": "identique",
-  "users": [
-    {
-      "prenom": "testprenom",
-      "nom": "testnom",
-      "client": "string",
-      "products": [
-        "string"
-      ],
-      "createdAt": "CURRENT_TIMESTAMP",
-      "updatedAt": "CURRENT_TIMESTAMP"
-    }
-  ],
-  "createdAt": "CURRENT_TIMESTAMP",
-  "updatedAt": "CURRENT_TIMESTAMP"
-}
-
-
-
 ==============================
 Login JWToken configuration et test
 api/login postman
@@ -162,23 +137,31 @@ Expected:
 }
 
 ==============================
+Group 
+[]ne pas afficher Password
+==============================
 Autodecouvrable (Maturite Niv3)
-https://github.com/willdurand/Hateoas
+https://github.com/willdurand/Hateoas*
+-
+- Fonctions optionnel
 ==============================
 Documentation
 ==============================
+Gestion des erreurs
+https://openclassrooms.com/fr/courses/4087036-construisez-une-api-rest-avec-symfony/4333906-gestion-des-erreurs
+throw exeption 404-
+==============================
+Pagination
 
+[ok]modification dans api_platform.yaml
 
+  defaults:
+    pagination_items_per_page: 8
 
-Ecrire des testsPHP Unit
-Enrironnement de test a mettre en place
-
-login  status 
-Create status 201
-Delete status 201
-
+resultat "hydra:view": 
 ==============================
 les contraintes de REST
 Gestion des erreurs
 
 Pagination
+==============================

@@ -39,11 +39,16 @@ class CreateUserController extends AbstractController
      */ 
     public function __invoke(Client $data, Request $request)//tente d'appeler un objet comme une fonction.
     {
+        //Si le format du JSON n'est pas correct, renvoyer une erreur avec le message d'exception. 
         //404 - si $data not found return message json ('this ressource {id} don't exist')
         // Oublie body Json Notice: Undefined index: prenom
         $saisie = json_decode($request->getContent(), true); 
     
-        
+        if (condition) {
+            # code...
+        }
+
+
         $user = (new User())
             ->setPrenom($saisie["prenom"])
             ->setNom($saisie["nom"]);
@@ -52,13 +57,11 @@ class CreateUserController extends AbstractController
 
         $data->addUser($user);
         
-
         $this->em->persist($user);
         //$this->em->flush();
-
-
 
         return new Response();
             
     }
 }
+

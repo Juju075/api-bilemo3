@@ -5,11 +5,15 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\Ressourceid;
 use App\Entity\Traits\Timestampable;
-use ApiPlatform\Core\Annotation\ApiResource;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiProperty;
+
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+
+use Hateoas\Configuration\Annotation as Hateoas;
+
 use JMS\Serializer\Annotation as Serializer;
 
 
@@ -17,6 +21,8 @@ use JMS\Serializer\Annotation as Serializer;
  * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
  * @ORM\HasLifecycleCallbacks
  * 
+ * @Hateoas\Relation("self", href = "expr('/api/produit/' ~ object.getId())")
+ *  
  * 
  * @ApiResource(
  *  collectionOperations={
@@ -72,7 +78,6 @@ class Produit
      * @Groups({"produit_read"}, {"produit_detail_read"})
      */
     private $price;
-
 
 
     public function getId(): ?int

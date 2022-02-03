@@ -5,19 +5,24 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+
 use App\Entity\Traits\Ressourceid;
 use App\Entity\Traits\Timestampable;
+use ApiPlatform\Core\Annotation\ApiProperty;
+
 use ApiPlatform\Core\Annotation\ApiResource;
+
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use JMS\Serializer\Annotation as Serializer;
-use Hateoas\Configuration\Annotation as Hateoas;
-use JMS\Serializer\Annotation;
+use symfony\Component\Validator as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-use symfony\Component\Validator as Assert;
-use ApiPlatform\Core\Annotation\ApiProperty;
+use JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Annotation;
+
+use Hateoas\Configuration\Annotation as Hateoas;
+
 
 //"access_control"="is_granted('ROLE_ADMIN')"
 // "put"={"denormalization_context"={"client_detail_write"}}, "patch", "delete"}
@@ -26,7 +31,6 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
 * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
 * @ORM\HasLifecycleCallbacks
-* 
 * 
 * @ApiResource(
 *  collectionOperations={
@@ -56,6 +60,40 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 *      "openapi_context"= {"summary"="Delete a specific Client ressource", "description"="description ici"},
 * },
 *})
+ * @Hateoas\Relation(
+ *      "self",
+ *      href = @Hateoas\Route(
+ *          "app_article_show",
+ *          parameters = { "id" = "expr(object.getId())" },
+ *          absolute = true
+ *      )
+ * ) 
+ * 
+ * @Hateoas\Relation("self", href = "expr('/api/client/' ~ object.getId())")
+ * 
+ * Afficher la liste des useurs - Afficher le detail d'un useur 
+ * 
+ * @Hateoas\Relation(
+ *      "self",
+ *      href = @Hateoas\Route(
+ *          "app_article_show",
+ *          parameters = { "id" = "expr(object.getId())" },
+ *          absolute = true
+ *      ),
+ *      "listing",
+ *         href = @Hateoas\Route(
+ *          "app_article_update",
+ *          parameters = { "id" = "expr(object.getId())" },
+ *          absolute = true
+ *      ),
+ *      "user_detail",
+ *      href = @Hateoas\Route(
+ *          "app_article_update",
+ *          parameters = { "id" = "expr(object.getId())" },
+ *          absolute = true
+ *      )
+ * ) 
+ * 
 */
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -208,23 +246,5 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    /**
-     * Called by "/api/client/{id}/user"
-     * For authorization purpose Check if this client is the ressource owner.
-     *
-     * @param integer $id
-     * @return boolean
-     */
-    public function isIdentical( int $id): bool
-    {
-        //compare {id} et getId
-        if ($id === $this->getId()) {
-            return true;
-        }else{
-            return false;
-        }
-    }
 }
-
 
