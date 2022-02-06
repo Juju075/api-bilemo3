@@ -117,7 +117,7 @@ Authorization:
 Login JWToken configuration et test
 api/login postman
 
-{² "é5TBRqs
+{
     "username": "prosacco.patricia@walsh.com",
     "password": "identique"
  }

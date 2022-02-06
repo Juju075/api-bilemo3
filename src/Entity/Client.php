@@ -71,7 +71,10 @@ use Hateoas\Configuration\Annotation as Hateoas;
  * 
  * @Hateoas\Relation("self", href = "expr('/api/client/' ~ object.getId())")
  * 
- * Afficher la liste des useurs - Afficher le detail d'un useur 
+ * Afficher la liste des userè² ²   
+ * .0 
+ * 
+ *  ²²   - Afficher le detail d'un useur 
  * 
  * @Hateoas\Relation(
  *      "self",
@@ -80,12 +83,18 @@ use Hateoas\Configuration\Annotation as Hateoas;
  *          parameters = { "id" = "expr(object.getId())" },
  *          absolute = true
  *      ),
+ * ) 
+ * 
+ * @Hateoas\Relation(
  *      "listing",
  *         href = @Hateoas\Route(
  *          "app_article_update",
  *          parameters = { "id" = "expr(object.getId())" },
  *          absolute = true
  *      ),
+ * ) 
+ * 
+ * @Hateoas\Relation(
  *      "user_detail",
  *      href = @Hateoas\Route(
  *          "app_article_update",

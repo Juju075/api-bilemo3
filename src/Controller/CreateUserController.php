@@ -12,9 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CreateUserController extends AbstractController
 {
@@ -42,35 +43,35 @@ class CreateUserController extends AbstractController
      * @param ValidatorInterface $validator
      * @return JsonResponse
      */ 
-    public function __invoke(Client $data, Request $request, SerializerInterface $serializer, ValidatorInterface $validator)
+    public function __invoke(Client $data, Request $request, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
     {
-        //Si le format du JSON n'est pas correct, renvoyer une erreur avec le message d'exception. 
-        //404 - si $data not found return message json ('this ressource {id} don't exist')
-        // Oublie body Json Notice: Undefined index: prenom
-
-        //1 - Json recu
+        //1 - Json > Array (decode)
         $JsonReceived = json_decode($request->getContent(), true); 
+        dump($JsonReceived);
     
         // Nouveau   
-        //2 - Deserialisation > Obj  utilise addUser de client?
-        $user = $serializer->deserialize($JsonReceived, User::class, 'json');
+        //2 - Json > Obj User must be of the type string, array given
+        //$user = $serializer->deserialize($JsonReceived, User::class, 'json');
+        $user = $serializer->deserialize($request->getContent(), User::class, 'json');
         dump($user);
 
 
-        //3 - Add newUser    
-        $user = (new User())
-            ->setPrenom($JsonReceived["prenom"])
-            ->setNom($JsonReceived["nom"]);
+        // //3 - etape inutile
+        // $user = (new User())
+        //     ->setPrenom($JsonReceived["prenom"])
+        //     ->setNom($JsonReceived["nom"]);
+
+        //3 -
         $data->addUser($user);
 
-        //Nouveau
-        //4- Verifie la vlaidite de l’entite avant de persisté.
+        //Nouveau Validation
+        //4- Verifie la validité de l’entite avant de persisté.
         $errors = $validator->validate($user);
-        dump($errors);
+        dd(count($errors));
 
         if (count($errors) > 0) {
             //return $this->json($errors, 400); //leve une exeption
-            throw new \Exception("Error Processing Request", 1);
+            throw new \Exception("Error Processing Request", 400);
             
         }
 
@@ -78,10 +79,8 @@ class CreateUserController extends AbstractController
         //$this->em->flush();
 
         //Retourne un JsonResponse    
-        return new Response();
+        return new JsonResponse();
             
     }
 }
-
-
 

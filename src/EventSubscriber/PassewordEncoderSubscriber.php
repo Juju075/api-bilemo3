@@ -47,10 +47,11 @@ private $encoder;
         }
     }
 
+    //Apiplatform events    
     public static function getSubscribedEvents()
     {
         return [
-            //KernelEvents::VIEW => ['encodePassword', EventPriorities::PRE_WRITE],
+            KernelEvents::VIEW => ['encodePassword', EventPriorities::PRE_WRITE],
         ];
         
     }
