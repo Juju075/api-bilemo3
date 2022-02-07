@@ -137,9 +137,6 @@ Expected:
 }
 
 ==============================
-Group 
-[]ne pas afficher Password
-==============================
 Autodecouvrable (Maturite Niv3)
 https://github.com/willdurand/Hateoas*
 -
@@ -162,6 +159,14 @@ resultat "hydra:view":
 ==============================
 les contraintes de REST
 Gestion des erreurs
-
-Pagination
+Exceptions
 ==============================
+Pagination ok
+==============================
+Groups
+
+Ne pas exposer
+http://127.0.0.1:8000/api/produit/936
+
+Groups
+contex id type created at updated at en READ

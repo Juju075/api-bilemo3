@@ -19,6 +19,9 @@ class UserproductRepository extends ServiceEntityRepository
         parent::__construct($registry, Userproduct::class);
     }
 
+
+
+
     // /**
     //  * @return Userproduct[] Returns an array of Userproduct objects
     //  */

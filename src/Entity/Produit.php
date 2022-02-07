@@ -14,8 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 use Hateoas\Configuration\Annotation as Hateoas;
 
-use JMS\Serializer\Annotation as Serializer;
-
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")

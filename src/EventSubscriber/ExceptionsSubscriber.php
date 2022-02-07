@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types = 1); 
 namespace App\EventSubscriber;
 
 use JMS\Serializer\SerializerInterface;
@@ -16,7 +16,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\serializer;
 
 
-
+// Option 1 : écouter les évènements lancés par JMSSerializer (Serialisation).
+// Option 2 : écouter l'évènement  kernel.exception
 
 class ExceptionsSubscriber implements EventSubscriberInterface
 {
@@ -36,7 +37,11 @@ class ExceptionsSubscriber implements EventSubscriberInterface
     {
         //Exception object from the received event  
         $exception = $event->getThrowable();
+        dump($exception);
 
+        //Si code erreur 404 
+
+        //Statuscode
         //Array   403 'Access Denied.' Normalisation getStatusCode()
         $data = ['code: '=>$exception->getCode(), 'message: '=>$exception->getMessage()];
 

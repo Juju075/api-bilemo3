@@ -23,10 +23,6 @@ use JMS\Serializer\Annotation;
 
 use Hateoas\Configuration\Annotation as Hateoas;
 
-
-//"access_control"="is_granted('ROLE_ADMIN')"
-// "put"={"denormalization_context"={"client_detail_write"}}, "patch", "delete"}
-
 /**
 * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
 * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
@@ -37,11 +33,12 @@ use Hateoas\Configuration\Annotation as Hateoas;
 *  "get"={
 *      "normalization_context"={"client_detail_read"},
 *      "method"="GET",
-*      "path"="/client/{id}/users"
+*      "path"="/client/{id}/users",
+*      "openapi_context"= {"summary"="Retrieves the collection of Client ressource' user", "description"="Type client identifer."},
 *  }},
 *
 *  itemOperations={
-*    "User_detail"={
+*      "User_detail"={
 *      "normalization_context"={"client_detail_read"},
 *      "method"="GET",
 *      "path"="/client/{id}/user/{user_id}",
@@ -63,7 +60,7 @@ use Hateoas\Configuration\Annotation as Hateoas;
  * @Hateoas\Relation(
  *      "self",
  *      href = @Hateoas\Route(
- *          "app_article_show",
+ *          "api_clients_get_collection",
  *          parameters = { "id" = "expr(object.getId())" },
  *          absolute = true
  *      )
@@ -71,10 +68,10 @@ use Hateoas\Configuration\Annotation as Hateoas;
  * 
  * @Hateoas\Relation("self", href = "expr('/api/client/' ~ object.getId())")
  * 
- * Afficher la liste des userè² ²   
+ * Afficher la liste des user   
  * .0 
  * 
- *  ²²   - Afficher le detail d'un useur 
+ *  - Afficher le detail d'un useur 
  * 
  * @Hateoas\Relation(
  *      "self",

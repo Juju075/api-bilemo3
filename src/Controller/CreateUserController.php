@@ -45,42 +45,25 @@ class CreateUserController extends AbstractController
      */ 
     public function __invoke(Client $data, Request $request, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
     {
-        //1 - Json > Array (decode)
-        $JsonReceived = json_decode($request->getContent(), true); 
-        dump($JsonReceived);
-    
-        // Nouveau   
-        //2 - Json > Obj User must be of the type string, array given
-        //$user = $serializer->deserialize($JsonReceived, User::class, 'json');
+        dd(('c la route @Route("/api/client/{id}/user'));
+        //contrainte unique prenom et nom
+        //1 - Json > Obj User
         $user = $serializer->deserialize($request->getContent(), User::class, 'json');
-        dump($user);
 
-
-        // //3 - etape inutile
-        // $user = (new User())
-        //     ->setPrenom($JsonReceived["prenom"])
-        //     ->setNom($JsonReceived["nom"]);
-
-        //3 -
+        //2 - Client::addUser
         $data->addUser($user);
 
-        //Nouveau Validation
-        //4- Verifie la validité de l’entite avant de persisté.
+        //3 - Verifie la validité de l’entite avant de persister.
         $errors = $validator->validate($user);
-        dd(count($errors));
 
         if (count($errors) > 0) {
-            //return $this->json($errors, 400); //leve une exeption
             throw new \Exception("Error Processing Request", 400);
-            
         }
 
         $this->em->persist($user);
-        //$this->em->flush();
+        $this->em->flush();
 
-        //Retourne un JsonResponse    
-        return new JsonResponse();
-            
+        return new JsonResponse();    
     }
 }
 

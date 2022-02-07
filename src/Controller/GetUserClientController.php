@@ -1,15 +1,17 @@
 <?php
-
+declare(strict_types = 1); 
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 
 use JMS\Serializer\SerializerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class GetUserClientController extends AbstractController
 {
@@ -18,27 +20,25 @@ class GetUserClientController extends AbstractController
      * @Entity("client", expr="repository.find(id)")
      * @Entity("user", expr="repository.find(user_id)")
      */
-    public function __invoke(User $user, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
+    public function __invoke(Request $request, UserRepository $userRepo, SerializerInterface $serializer): JsonResponse
     {
+        //Afficher Obj User > Json
+        //via un queryBuilder
+        $detailUser = $userRepo->findOneByQueryBuilder($request->get('id'), $request->get('user_id'));
+        dd($detailUser);
 
-        //Nouveau   
-        //Erreur {user_id}    
-        $errors = $validator->validate($user);
-        dump($errors);
 
-        if (count($errors) > 0) {
-            //return $this->json($errors, 400); //leve une exeption
-            throw new \Exception("Error Processing Request", 1);
-            
-        }
+        //si non trouve
 
-        $userSerialized = $serializer->serialize($user, 'json');
 
-        //$response = new Response($userSerialized);
-        //$response->headers->set('Content-Type', 'application/json');
 
-        $response = new JsonResponse($userSerialized, 200, []);
-        return $response;
+
+
+        //serialiser
+        $var = $serializer->serialize($detailUser, 'json');
+
+        return new JsonResponse();
+
     }
 }
 

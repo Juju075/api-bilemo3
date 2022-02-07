@@ -34,9 +34,13 @@ private $encoder;
      * @param ViewEvent $event
      * @return void
      */
-    public function encodePassword(ViewEvent $event) //Kernel event 
+    public function encodePassword(ViewEvent $event): void
     {
+        dump($event);
+        //limite uniquement a des requete post
         $controllerResult = $event->getControllerResult; //on capte le resultat du controller  Notice: Undefined property:
+        dd($controllerResult);
+       
         $method = $event->getRequest()->getMethod(); //method 
 
         //Important vas cibler uniquement un POST sur l'entité Client.    
@@ -51,7 +55,7 @@ private $encoder;
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::VIEW => ['encodePassword', EventPriorities::PRE_WRITE],
+            //KernelEvents::VIEW => ['encodePassword', EventPriorities::PRE_WRITE],
         ];
         
     }
