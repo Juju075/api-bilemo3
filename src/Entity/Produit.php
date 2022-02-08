@@ -19,9 +19,6 @@ use Hateoas\Configuration\Annotation as Hateoas;
  * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
  * @ORM\HasLifecycleCallbacks
  * 
- * @Hateoas\Relation("self", href = "expr('/api/produit/' ~ object.getId())")
- *  
- * 
  * @ApiResource(
  *  collectionOperations={
  * "get"={
@@ -34,16 +31,43 @@ use Hateoas\Configuration\Annotation as Hateoas;
  * "get"={
  * "normalization_context"={"produit_detail_read"},
  *      "method"="GET",
- *      "path"="/produit/{id}",
+ *      "path"="/produit/{id}",        
  *      "openapi_context"= {"summary"="Display specific product detail", "description"="description ici"},
- * }}
- * )
+ * },
+ * "post"={
+ *      "method"="POST",
+ *      "controller" = NotFounAction::class,
+ *      "openapi_context" ={"summary"="hidden",},
+ *      "read"= false,
+ *      "output"= false
+ * },})
+ * 
+ * 
+ * @Hateoas\Relation(
+ *      "self",
+ *      href = @Hateoas\Route(
+ *          "api_produits_get_collection",
+ *          parameters = { "id" = "expr(object.getId())" },
+ *          absolute = true
+ *      )
+ * ) 
+ * 
+ * @Hateoas\Relation(
+ *      "Get a specific product",
+ *         href = @Hateoas\Route(
+ *          "api_produits_get_item",
+ *          parameters = { "id" = "expr(object.getId())" },
+ *          absolute = true
+ *      )
+ * ) 
+ * 
+ *  ne pas afficher les dates et les id de / toute les @ en reponse
  * 
 
  */
 class Produit
 {
-    use Timestampable;  
+    use Timestampable;  //Ne pas afficher en lecture
     use Ressourceid;
 
     /**
@@ -119,9 +143,9 @@ class Produit
         return $this;
     }
 
-    public function getPrice(): ?float
+    public function getPrice():? string
     {
-        return $this->price;
+        return $this->price." "."euros";
     }
 
     public function setPrice(float $price): self
@@ -131,3 +155,4 @@ class Produit
         return $this;
     }
 }
+

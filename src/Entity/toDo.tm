@@ -40,7 +40,7 @@ http://127.0.0.1:8000/
 
 [ok] GET    api/client/{id}/users   [ok]load UsersFixtures.
 [1]  GET    api/client/{id}/user/{user_id}  >> Documentation 2 params.
-[a finir ok]  POST   api/client/{id}/user   Custom Operation >> Grosse erreur de documentation à recrire $client->addUser()  FAIRE UN CONTROLLEUR
+[ok] POST   api/client/{id}/user   Custom Operation >> Grosse erreur de documentation à recrire $client->addUser()  FAIRE UN CONTROLLEUR
 [ok] DELETE api/client/{id}/users 
 
 

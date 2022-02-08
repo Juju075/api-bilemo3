@@ -19,9 +19,9 @@ use symfony\Component\Validator as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation;
 
-use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
 * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
@@ -56,53 +56,76 @@ use Hateoas\Configuration\Annotation as Hateoas;
 *      "path"="/client/{id}/users",
 *      "openapi_context"= {"summary"="Delete a specific Client ressource", "description"="description ici"},
 * },
-*})
- * @Hateoas\Relation(
- *      "self",
- *      href = @Hateoas\Route(
- *          "api_clients_get_collection",
- *          parameters = { "id" = "expr(object.getId())" },
- *          absolute = true
- *      )
- * ) 
- * 
- * @Hateoas\Relation("self", href = "expr('/api/client/' ~ object.getId())")
- * 
- * Afficher la liste des user   
- * .0 
- * 
- *  - Afficher le detail d'un useur 
- * 
- * @Hateoas\Relation(
- *      "self",
- *      href = @Hateoas\Route(
- *          "app_article_show",
- *          parameters = { "id" = "expr(object.getId())" },
- *          absolute = true
- *      ),
- * ) 
- * 
- * @Hateoas\Relation(
- *      "listing",
- *         href = @Hateoas\Route(
- *          "app_article_update",
- *          parameters = { "id" = "expr(object.getId())" },
- *          absolute = true
- *      ),
- * ) 
- * 
- * @Hateoas\Relation(
- *      "user_detail",
- *      href = @Hateoas\Route(
- *          "app_article_update",
- *          parameters = { "id" = "expr(object.getId())" },
- *          absolute = true
- *      )
- * ) 
- * 
+* })
+*
+* @Serializer\XmlRoot("client")
+*
+* @Hateoas\Relation(
+*      "self",
+*      href = @Hateoas\Route(
+*          "api_clients_get_collection",
+*      parameters = { "id" = "expr(object.getId())" },
+*      absolute = true
+*      )
+* ) 
+* 
+* @Hateoas\Relation("self", href = "expr('/api/client/' ~ object.getId())")
+* 
+* Afficher la liste des user   
+* .0 
+* 
+*  - Afficher le detail d'un useur 
+* 
+* @Hateoas\Relation(
+*      "self",
+*      href = @Hateoas\Route(
+*          "app_article_show",
+*          parameters = { "id" = "expr(object.getId())" },
+*          absolute = true
+*      )
+* ) 
+* 
+* @Hateoas\Relation(
+*      "Get all users releated to a specific client",
+*         href = @Hateoas\Route(
+*          "api_clients_get_collection",
+*          parameters = { "id" = "expr(object.getId())" },
+*          absolute = true
+*      )
+* ) 
+* 
+* @Hateoas\Relation(
+*      "Get specific user detail reletaed to a client",
+*      href = @Hateoas\Route(
+*          "api_clients_User_detail_item",
+*          parameters = { "id" = "expr(object.getId())" },
+*          absolute = true
+*      )
+* ) 
+* 
+* @Hateoas\Relation(
+*      "Add new user to a specific client",
+*      href = @Hateoas\Route(
+*          "api_clients_Add_User_item",
+*          parameters = { "id" = "expr(object.getId())" },
+*          absolute = true
+*      )
+* ) 
+* 
+* @Hateoas\Relation(
+*      "Delete a specific client and all users reletaed",
+*      href = @Hateoas\Route(
+*          "api_clients_delete_item",
+*          parameters = { "id" = "expr(object.getId())" },
+*          absolute = true
+*      )
+* )  
+* 
 */
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    /** @Serializer\XmlAttribute */
+    
     use Timestampable;  
     use Ressourceid;
 
