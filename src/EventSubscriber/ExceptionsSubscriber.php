@@ -4,13 +4,13 @@ namespace App\EventSubscriber;
 
 use JMS\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Response;
+
+
+
+
 use Symfony\Component\HttpKernel\KernelEvents;
 
-
-
-
 use Symfony\Component\HttpFoundation\JsonResponse;
-
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\serializer;
@@ -28,12 +28,56 @@ class ExceptionsSubscriber implements EventSubscriberInterface
         $this->serializer = $serializer;
     }
 
+
+
+public function onException(ExceptionEvent $event) {
+
+    	$response = new JsonResponse();
+
+        $exception = $event->getThrowable();
+
+        switch ($exception) {
+            case $exception instanceof NotFoundHttpException:
+                $response->setStatusCode(Response::HTTP_NOT_FOUND);
+                $response->setData([
+                	'code' => Response::HTTP_NOT_FOUND,
+                	'message' => 'Resource not found'
+                ]);
+                break;
+            case $exception instanceof AccessDeniedException:
+                $response->setStatusCode(Response::HTTP_FORBIDDEN);
+                $response->setData([
+                	'code' => Response::HTTP_FORBIDDEN,
+                	'message' => 'Forbiden'
+                ]);
+                break;
+            case $exception instanceof InvalidArgumentException:
+                $response->setStatusCode($exception->getCode());
+                $response->setData($exception->getMessage());
+                break;
+            default:
+                $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
+                $response->setData([
+                	'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
+                	'message' => 'Server error'
+                ]);
+            break;
+        }
+
+        $event->setResponse($response);
+    }
+
+
+
+
+
+
     // Objectif Renvoyer Model suivant: 
     // {
     //   "code": 404,
     //   "messages": "Message d'erreur."
     // }
-    public function onKernelException(ExceptionEvent $event): JsonResponse
+    public function onKernelException(ExceptionEvent $event)
     {
         //Exception object from the received event  
         $exception = $event->getThrowable();
@@ -46,11 +90,10 @@ class ExceptionsSubscriber implements EventSubscriberInterface
         $data = ['code: '=>$exception->getCode(), 'message: '=>$exception->getMessage()];
 
         //Obj exception > Json
-        $message = $this->serializer->serialize($data, 'json');
+        $message = new JsonResponse($data);
 
-        // Response object to display the exception details
-        $response = new JsonResponse($message);
-        return $response;
+        $event->setResponse($message); //Response clasic
+
     }
 
 
@@ -60,7 +103,7 @@ class ExceptionsSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents() 
     {
         return [
-            KernelEvents::EXCEPTION => ['onKernelException', 10],
+            KernelEvents::EXCEPTION => ['onException', 10],
         ];    
     }    
 }

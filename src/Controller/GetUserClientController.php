@@ -3,12 +3,15 @@ declare(strict_types = 1);
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Client;
 use App\Repository\UserRepository;
 
 use JMS\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Normalizer\UidNormalizer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,24 +23,21 @@ class GetUserClientController extends AbstractController
      * @Entity("client", expr="repository.find(id)")
      * @Entity("user", expr="repository.find(user_id)")
      */
-    public function __invoke(Request $request, UserRepository $userRepo, SerializerInterface $serializer): JsonResponse
+    public function __invoke(Client $client, User $user, SerializerInterface $serializer): Response
     {
-        //Afficher Obj User > Json
-        //via un queryBuilder
-        $detailUser = $userRepo->findOneByQueryBuilder($request->get('id'), $request->get('user_id'));
-        dd($detailUser);
 
-
-        //si non trouve
-
-
-
-
+        //exit
+        if (! $client->getUsers()->contains($user)) {
+            throw $this->createAccessDeniedException();
+        }
 
         //serialiser
-        $var = $serializer->serialize($detailUser, 'json');
+        $response =  $serializer->serialize($user, 'json');
 
-        return new JsonResponse();
+        //Array
+        return new Response($response,Response::HTTP_OK,  
+    ['content-type' => 'application/json']
+);
 
     }
 }

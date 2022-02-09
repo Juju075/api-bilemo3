@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CreateUserController extends AbstractController
@@ -43,9 +44,8 @@ class CreateUserController extends AbstractController
      * @param ValidatorInterface $validator
      * @return JsonResponse
      */ 
-    public function __invoke(Client $data, Request $request, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
+    public function __invoke(Client $data, Request $request, SerializerInterface $serializer, ValidatorInterface $validator, NormalizerInterface $normalizer): JsonResponse
     {
-        dd(('c la route @Route("/api/client/{id}/user'));
         //contrainte unique prenom et nom
         //1 - Json > Obj User
         $user = $serializer->deserialize($request->getContent(), User::class, 'json');
@@ -57,13 +57,16 @@ class CreateUserController extends AbstractController
         $errors = $validator->validate($user);
 
         if (count($errors) > 0) {
-            throw new \Exception("Error Processing Request", 400);
+            throw new \Exception("Error Processing Request", 404);
         }
 
         $this->em->persist($user);
         $this->em->flush();
 
-        return new JsonResponse();    
+        //serialize
+        $response =  $normalizer->normalize($user);
+
+        return new JsonResponse($response);  // need array  
     }
 }
 

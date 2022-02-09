@@ -13,14 +13,15 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 
 use Symfony\Component\Serializer\Annotation\Groups;
+
+
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use symfony\Component\Validator as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 use JMS\Serializer\Annotation as Serializer;
 use Hateoas\Configuration\Annotation as Hateoas;
-use JMS\Serializer\Annotation;
+
 
 
 /**
@@ -58,7 +59,6 @@ use JMS\Serializer\Annotation;
 * },
 * })
 *
-* @Serializer\XmlRoot("client")
 *
 * @Hateoas\Relation(
 *      "self",
@@ -76,28 +76,12 @@ use JMS\Serializer\Annotation;
 * 
 *  - Afficher le detail d'un useur 
 * 
-* @Hateoas\Relation(
-*      "self",
-*      href = @Hateoas\Route(
-*          "app_article_show",
-*          parameters = { "id" = "expr(object.getId())" },
-*          absolute = true
-*      )
-* ) 
+
 * 
 * @Hateoas\Relation(
 *      "Get all users releated to a specific client",
 *         href = @Hateoas\Route(
 *          "api_clients_get_collection",
-*          parameters = { "id" = "expr(object.getId())" },
-*          absolute = true
-*      )
-* ) 
-* 
-* @Hateoas\Relation(
-*      "Get specific user detail reletaed to a client",
-*      href = @Hateoas\Route(
-*          "api_clients_User_detail_item",
 *          parameters = { "id" = "expr(object.getId())" },
 *          absolute = true
 *      )
@@ -111,16 +95,6 @@ use JMS\Serializer\Annotation;
 *          absolute = true
 *      )
 * ) 
-* 
-* @Hateoas\Relation(
-*      "Delete a specific client and all users reletaed",
-*      href = @Hateoas\Route(
-*          "api_clients_delete_item",
-*          parameters = { "id" = "expr(object.getId())" },
-*          absolute = true
-*      )
-* )  
-* 
 */
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -137,7 +111,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="json")
-     * @Groups({"client_read"}, {"client_detail_read"}, {"client_write"}, {"client_detail_write"})
+     * @Serializer\Groups({"client_read"}, {"client_detail_read"}, {"client_write"}, {"client_detail_write"})
      */
     private $roles = [];
 
