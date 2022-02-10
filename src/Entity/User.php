@@ -101,7 +101,7 @@ class User
     /**
      * @return Collection|Produit[]
      */
-    public function getProducts(): Collection
+    public function getProducts(): ?Collection
     {
         return $this->products;
     }

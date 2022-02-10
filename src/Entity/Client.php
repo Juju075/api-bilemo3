@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 use App\Entity\Traits\Ressourceid;
 use App\Entity\Traits\Timestampable;
-use ApiPlatform\Core\Annotation\ApiProperty;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 
@@ -39,13 +38,13 @@ use Hateoas\Configuration\Annotation as Hateoas;
 *  }},
 *
 *  itemOperations={
-*      "User_detail"={
+*   "get"={
 *      "normalization_context"={"client_detail_read"},
 *      "method"="GET",
 *      "path"="/client/{id}/user/{user_id}",
 *      "openapi_context"= {"summary"="Display details on specific Client' user", "description"="2 parameters are required to perform this request."},
 *  },
-*  "Add_User"={
+*  "post"={
 *      "denormalization_context"={"client_write"},
 *      "method"="POST",
 *      "path"="/client/{id}/user",
@@ -71,13 +70,6 @@ use Hateoas\Configuration\Annotation as Hateoas;
 * 
 * @Hateoas\Relation("self", href = "expr('/api/client/' ~ object.getId())")
 * 
-* Afficher la liste des user   
-* .0 
-* 
-*  - Afficher le detail d'un useur 
-* 
-
-* 
 * @Hateoas\Relation(
 *      "Get all users releated to a specific client",
 *         href = @Hateoas\Route(
@@ -98,7 +90,6 @@ use Hateoas\Configuration\Annotation as Hateoas;
 */
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    /** @Serializer\XmlAttribute */
     
     use Timestampable;  
     use Ressourceid;
@@ -246,7 +237,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
                 $user->setClient(null);
             }
         }
-
+        
         return $this;
     }
 }

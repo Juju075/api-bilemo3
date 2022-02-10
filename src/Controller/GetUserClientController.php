@@ -4,16 +4,12 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Client;
-use App\Repository\UserRepository;
 
 use JMS\Serializer\SerializerInterface;
-use Symfony\Component\HttpFoundation\Request;
+
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Serializer\Normalizer\UidNormalizer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class GetUserClientController extends AbstractController
@@ -25,19 +21,19 @@ class GetUserClientController extends AbstractController
      */
     public function __invoke(Client $client, User $user, SerializerInterface $serializer): Response
     {
-
-        //exit
+        //if throw Exception On verifie si l'user existe dans la liste de ce client.
         if (! $client->getUsers()->contains($user)) {
             throw $this->createAccessDeniedException();
         }
 
         //serialiser
-        $response =  $serializer->serialize($user, 'json');
+        $response =  $serializer->serialize($user, 'json');// Error strpos() expects parameter 1 to be string, array given (500 Internal Server Error)
+        dd($response);
 
         //Array
-        return new Response($response,Response::HTTP_OK,  
-    ['content-type' => 'application/json']
-);
+        return new Response($response,Response::HTTP_OK,
+        ['content-type' => 'application/json']
+        );
 
     }
 }

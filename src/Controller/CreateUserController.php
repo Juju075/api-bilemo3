@@ -9,12 +9,10 @@ use JMS\Serializer\SerializerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -56,16 +54,19 @@ class CreateUserController extends AbstractController
         //3 - Verifie la validité de l’entite avant de persister.
         $errors = $validator->validate($user);
 
-        if (count($errors) > 0) {
+        if (count($errors) > 0) { //Error Processing Request
+            // recuperer le message d'erreur 
+            //$message = $errors->ge
+            dump($errors);
             throw new \Exception("Error Processing Request", 404);
+
         }
-
         $this->em->persist($user);
-        $this->em->flush();
+        $this->em->flush(); //ok enregistre
 
-        //serialize
-        $response =  $normalizer->normalize($user);
-
+        //Obj > Array
+        $response =  $normalizer->normalize($user); //Error Unable to generate an IRI for &quot;App\Entity\Client&quot;.
+        dd($response);
         return new JsonResponse($response);  // need array  
     }
 }
