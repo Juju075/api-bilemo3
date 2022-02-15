@@ -1,6 +1,6 @@
 Soutenance verification api 
 
-
+Connecté avec Client 293
 gestions erreurs: 404 fonctionne
 
 =========================
@@ -48,3 +48,7 @@ api/client/{id}/users    http://127.0.0.1:8000/api/client/{id}/users
 Errodr Unable to generate an IRI for \"App\\Entity\\Client\
 
 securite avoir le role client et que clien = client{id}
+
+
+=========================
+manuel technique

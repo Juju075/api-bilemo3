@@ -9,20 +9,12 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\Ressourceid;
 use App\Entity\Traits\Timestampable;
 
-use Hateoas\Configuration\Annotation as Hateoas;
-
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Serializer\Annotation\Groups;
-use symfony\Component\Validator as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks
  * @UniqueEntity(fields={"prenom","nom"}, message="There is already an account with this fullname")
- * 
- * @Hateoas\Relation("self", href = "expr('/api/user/' ~ object.getId())")
- * 
- * 
  */
 class User
 {

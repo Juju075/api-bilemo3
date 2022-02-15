@@ -21,13 +21,13 @@ class GetUserClientController extends AbstractController
      */
     public function __invoke(Client $client, User $user, SerializerInterface $serializer): Response
     {
+
         //if throw Exception On verifie si l'user existe dans la liste de ce client.
         if (! $client->getUsers()->contains($user)) {
             throw $this->createAccessDeniedException();
         }
-
-        //serialiser
-        $response =  $serializer->serialize($user, 'json');// Error strpos() expects parameter 1 to be string, array given (500 Internal Server Error)
+        //JsonContent
+        $response = $serializer->serialize($user, 'json');// Error strpos() expects parameter 1 to be string, array given (500 Internal Server Error)
         dd($response);
 
         //Array

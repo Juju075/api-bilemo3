@@ -5,15 +5,11 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\Ressourceid;
 use App\Entity\Traits\Timestampable;
-
+use JMS\Serializer\Annotation as Serializer;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiProperty;
 
-use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
-
-use Hateoas\Configuration\Annotation as Hateoas;
-
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
@@ -41,29 +37,6 @@ use Hateoas\Configuration\Annotation as Hateoas;
  *      "read"= false,
  *      "output"= false
  * },})
- * 
- * 
- * @Hateoas\Relation(
- *      "self",
- *      href = @Hateoas\Route(
- *          "api_produits_get_collection",
- *          parameters = { "id" = "expr(object.getId())" },
- *          absolute = true
- *      )
- * ) 
- * 
- * @Hateoas\Relation(
- *      "Get a specific product",
- *         href = @Hateoas\Route(
- *          "api_produits_get_item",
- *          parameters = { "id" = "expr(object.getId())" },
- *          absolute = true
- *      )
- * ) 
- * 
- *  ne pas afficher les dates et les id de / toute les @ en reponse
- * 
-
  */
 class Produit
 {
@@ -74,7 +47,7 @@ class Produit
     * @ORM\Column(type="string", length=255)
     * @Assert\Length(min = 3, max = 50)
     * @Assert\Unique
-    * @Groups({"produit_read"}, {"produit_detail_read"})
+    * @Serializer\Groups({"produit_read"}, {"produit_detail_read"})
     * @ApiProperty(
     *     openapiContext={"required"=true, "minLength"=4, "example"="some example text"})
     */
@@ -84,20 +57,20 @@ class Produit
      * @ORM\Column(type="string", length=255)
      * @Assert\Unique
      * @Assert\Length(min = 3, max = 20)
-     * @Groups({"produit_read"}, {"produit_detail_read"})
+     * @Serializer\Groups({"produit_read"}, {"produit_detail_read"})
      */
     private $model; 
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min = 3, max = 400)
-     * @Groups({"produit_read"}, {"produit_detail_read"})
+     * @Serializer\Groups({"produit_read"}, {"produit_detail_read"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="float")
-     * @Groups({"produit_read"}, {"produit_detail_read"})
+     * @Serializer\Groups({"produit_read"}, {"produit_detail_read"})
      */
     private $price;
 

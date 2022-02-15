@@ -11,17 +11,11 @@ use App\Entity\Traits\Timestampable;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 
-use Symfony\Component\Serializer\Annotation\Groups;
-
-
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 use JMS\Serializer\Annotation as Serializer;
-use Hateoas\Configuration\Annotation as Hateoas;
-
-
 
 /**
 * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
@@ -54,39 +48,10 @@ use Hateoas\Configuration\Annotation as Hateoas;
 *  "delete"={
 *      "method"="DELETE",
 *      "path"="/client/{id}/users",
+*      "controller"="DeleteClientController::class", 
 *      "openapi_context"= {"summary"="Delete a specific Client ressource", "description"="description ici"},
 * },
 * })
-*
-*
-* @Hateoas\Relation(
-*      "self",
-*      href = @Hateoas\Route(
-*          "api_clients_get_collection",
-*      parameters = { "id" = "expr(object.getId())" },
-*      absolute = true
-*      )
-* ) 
-* 
-* @Hateoas\Relation("self", href = "expr('/api/client/' ~ object.getId())")
-* 
-* @Hateoas\Relation(
-*      "Get all users releated to a specific client",
-*         href = @Hateoas\Route(
-*          "api_clients_get_collection",
-*          parameters = { "id" = "expr(object.getId())" },
-*          absolute = true
-*      )
-* ) 
-* 
-* @Hateoas\Relation(
-*      "Add new user to a specific client",
-*      href = @Hateoas\Route(
-*          "api_clients_Add_User_item",
-*          parameters = { "id" = "expr(object.getId())" },
-*          absolute = true
-*      )
-* ) 
 */
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -96,7 +61,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"client_read"}, {"client_detail_read"}, {"client_write"}, {"client_detail_write"})
+     * @Serializer\Groups({"client_read"}, {"client_detail_read"}, {"client_write"}, {"client_detail_write"})
      */
     private $email;
 
