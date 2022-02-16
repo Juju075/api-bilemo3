@@ -21,7 +21,7 @@ class UsersProductsFixtures extends Fixture
 
             for ($nbUser=0; $nbUser <4 ; $nbUser++) { 
                 $user = $this->getReference('user_'.$client.'_'.$nbUser);
-                $nbRandom = rand(0, 25);
+                $nbRandom = rand(0, 24);
                 $produit = $this->getReference('produit_'.$nbRandom);
                 $user->addProduct($produit);
                 $manager->persist($produit);

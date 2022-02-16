@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-use App\Entity\Traits\Ressourceid;
+ 
 use App\Entity\Traits\Timestampable;
 
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -57,17 +57,21 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
     
     use Timestampable;  
-    use Ressourceid;
+
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Serializer\Groups({"client_read"}, {"client_detail_read"}, {"client_write"}, {"client_detail_write"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
-     * @Serializer\Groups({"client_read"}, {"client_detail_read"}, {"client_write"}, {"client_detail_write"})
      */
     private $roles = [];
 
@@ -87,10 +91,11 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
         $this->users = new ArrayCollection();
     }
 
+
     public function getId(): ?int
     {
         return $this->id;
-    }
+    }    
 
     public function getEmail(): ?string
     {

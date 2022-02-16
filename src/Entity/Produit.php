@@ -3,7 +3,7 @@ declare(strict_types = 1);
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Traits\Ressourceid;
+
 use App\Entity\Traits\Timestampable;
 use JMS\Serializer\Annotation as Serializer;
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -29,25 +29,24 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      "method"="GET",
  *      "path"="/produit/{id}",        
  *      "openapi_context"= {"summary"="Display specific product detail", "description"="description ici"},
- * },
- * "post"={
- *      "method"="POST",
- *      "controller" = NotFounAction::class,
- *      "openapi_context" ={"summary"="hidden",},
- *      "read"= false,
- *      "output"= false
  * },})
  */
 class Produit
 {
     use Timestampable;  //Ne pas afficher en lecture
-    use Ressourceid;
+
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
 
     /**
     * @ORM\Column(type="string", length=255)
     * @Assert\Length(min = 3, max = 50)
     * @Assert\Unique
-    * @Serializer\Groups({"produit_read"}, {"produit_detail_read"})
     * @ApiProperty(
     *     openapiContext={"required"=true, "minLength"=4, "example"="some example text"})
     */
@@ -57,20 +56,17 @@ class Produit
      * @ORM\Column(type="string", length=255)
      * @Assert\Unique
      * @Assert\Length(min = 3, max = 20)
-     * @Serializer\Groups({"produit_read"}, {"produit_detail_read"})
      */
     private $model; 
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min = 3, max = 400)
-     * @Serializer\Groups({"produit_read"}, {"produit_detail_read"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="float")
-     * @Serializer\Groups({"produit_read"}, {"produit_detail_read"})
      */
     private $price;
 

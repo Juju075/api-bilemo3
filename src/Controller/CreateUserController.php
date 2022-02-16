@@ -51,8 +51,6 @@ class CreateUserController extends AbstractController
             //1 - Json > Obj User
             $user = $serializer->deserialize($request->getContent(), User::class, 'json');
 
-            //2 - Client::addUser
-            $data->addUser($user);
 
             //3 - Verifie la validité de l’entite avant de persister.
             $errors = $validator->validate($user);
@@ -64,12 +62,15 @@ class CreateUserController extends AbstractController
                 throw new \Exception("Error Processing Request", 404);
 
             }
-        $this->em->persist($user);
-        $this->em->flush(); //ok enregistre
+
+            //2 - Client::addUser
+            $data->addUser($user);
+
+            $this->em->persist($user);
+            $this->em->flush(); //ok enregistre
 
             //Obj > Array
-            $response =  $normalizer->normalize($user); //Error Unable to generate an IRI for &quot;App\Entity\Client&quot;.
-            dd($response);
+            $response =  $normalizer->normalize($user);//genere url de l'entite //Error Unable to generate an IRI for &quot;App\Entity\Client&quot;.
             return new JsonResponse($response);  // need array  
 
         }else{
