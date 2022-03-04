@@ -28,6 +28,7 @@ use JMS\Serializer\Annotation as Serializer;
 *      "normalization_context"={"client_detail_read"},
 *      "method"="GET",
 *      "path"="/client/{id}/users",
+*      "controller"="GetUsersCollectionController.php::class", 
 *      "openapi_context"= {"summary"="Retrieves the collection of Client ressource' user", "description"="Type client identifer."},
 *  }},
 *

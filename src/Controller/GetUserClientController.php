@@ -27,7 +27,7 @@ class GetUserClientController extends AbstractController
             throw $this->createAccessDeniedException();
         }
         //JsonContent
-        $response = $serializer->serialize($user, 'json');// Error strpos() expects parameter 1 to be string, array given (500 Internal Server Error)
+        $response = $serializer->serialize($user, 'json');
 
         //Array
         return new Response($response,Response::HTTP_OK,

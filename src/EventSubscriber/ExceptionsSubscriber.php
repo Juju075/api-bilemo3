@@ -36,6 +36,7 @@ class ExceptionsSubscriber implements EventSubscriberInterface
                     ]);
                     break;
                 case $exception instanceof InvalidArgumentException:
+                    dd('InvalidArgumentException');
                     $response->setStatusCode($exception->getCode());
                     $response->setData($exception->getMessage());
                     break;
@@ -49,14 +50,14 @@ class ExceptionsSubscriber implements EventSubscriberInterface
                 break;
             }
 
-            $event->setResponse($response);  //
+            $event->setResponse($response);
     }
 
     //Symfony events
     public static function getSubscribedEvents() 
     {
         return [
-            KernelEvents::EXCEPTION => ['onKernelException', 10],
+            //KernelEvents::EXCEPTION => ['onKernelException', 10],
         ];    
     }    
 }

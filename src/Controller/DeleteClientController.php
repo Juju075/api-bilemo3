@@ -5,23 +5,26 @@ namespace App\Controller;
 use App\Entity\Client;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 class DeleteClientController extends AbstractController
 {
-    public function __construct(private EntityManagerInterface $em)
-    {}
+    private $em;
+
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+    }
 
     /**
-     * Delete Client requested.
-     *
-     * @param Client $data
-     * @return JsonResponse
-     */    
+     * @Route("/api/client/{id}/users", methods={"DELETE"})
+     */
     public function __invoke(Client $data): JsonResponse
     {
+
         $userLogged = ($this->getUser())
             ->getUserIdentifier();
 
@@ -29,7 +32,7 @@ class DeleteClientController extends AbstractController
             $this->em->remove($data);
         }
 
-        $response = ['client'=>$data, 'à ete supprime'=>'']; // client id à ete supprimé.
+        $response = ['client'=> $data->getId(), 'à ete supprime'];
         return new JsonResponse($response);
 
     }
