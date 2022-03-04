@@ -2,8 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Produit;
-use App\Repository\ProduitRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
@@ -14,7 +12,7 @@ class UsersProductsFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {   
         //chaque user a 0 et 3 produits
-        $faker = Faker\Factory::create('fr_FR');
+        //$faker = Faker\Factory::create('fr_FR');
         $clients  = [0,1,2,3];       
 
         foreach ($clients as $client) { 

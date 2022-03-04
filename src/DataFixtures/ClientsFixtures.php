@@ -1,23 +1,23 @@
 <?php
 declare(strict_types=1);
 namespace App\DataFixtures;
-use App\Entity\Client;
+use Faker;
 
+use App\Entity\Client;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Faker;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class ClientsFixtures extends Fixture
 {
     /**
      * @var UserPasswordEncoderInterface
      */
-    private UserPasswordEncoderInterface $clientPasswordEncoder;
+    private UserPasswordHasherInterface $clientPasswordEncoder;
 
 
 
-    public function __construct(UserPasswordEncoderInterface $clientPasswordEncoder){
+    public function __construct(UserPasswordHasherInterface $clientPasswordEncoder){
         $this->clientPasswordEncoder = $clientPasswordEncoder;
     }
 

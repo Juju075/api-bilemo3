@@ -2,17 +2,16 @@
 declare(strict_types = 1); 
 namespace App\EventSubscriber;
 
-
-
+use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\KernelEvents;
+
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpKernel\Event\ExceptionEvent;
-
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 
 class ExceptionsSubscriber implements EventSubscriberInterface
 {
@@ -57,7 +56,7 @@ class ExceptionsSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents() 
     {
         return [
-            //KernelEvents::EXCEPTION => ['onKernelException', 10],
+            KernelEvents::EXCEPTION => ['onKernelException', 10],
         ];    
     }    
 }
