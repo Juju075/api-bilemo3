@@ -6,8 +6,6 @@ use App\Entity\User;
 use App\Entity\Client;
 
 use JMS\Serializer\SerializerInterface;
-
-use JMS\Serializer\SerializationContext;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
