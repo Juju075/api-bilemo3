@@ -18,12 +18,13 @@ class GetUsersCollectionController extends AbstractController
      */
     public function __invoke(Client $client, UserRepository $userRepository, SerializerInterface $serializer): JsonResponse
     {
-        $collectionUsers = $userRepository->findBy(['client'=>$client->getId()]); //Ne pas afficher password
+        $collectionUsers = $userRepository->findBy(['client'=>$client->getId()]); //id prenom nom 
+    //     dd($collectionUsers);
 
-        $response = $serializer->serialize($collectionUsers, 'json', SerializationContext::create()->setGroups(['client_collection_read']));
-        //groups uniquement id prenom nom create at 
-       $json = preg_replace('!\\r?\\n!', "", $response);
+    //     $response = $serializer->serialize($collectionUsers, 'json', SerializationContext::create()->setGroups(['client_collection_read']));
+    //     //groups uniquement id prenom nom create at 
+    //    $json = preg_replace('!\\r?\\n!', "", $response);
 
-        return new JsonResponse($json);
+        return new JsonResponse($collectionUsers); //Need array
     }
 }
