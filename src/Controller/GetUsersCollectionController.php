@@ -17,15 +17,11 @@ class GetUsersCollectionController extends AbstractController
      */
     public function __invoke(Client $client, UserRepository $userRepository, SerializerInterface $serializer): JsonResponse
     {
-
-        // client_id
         $collectionUsers = $userRepository->findBy(['client'=>$client->getId()]); //Ne pas afficher password
-        $collectionUsers->serialize();
-    
 
-        return new JsonResponse($collectionUsers);
-        // return new Response($response,Response::HTTP_OK,  // User::class
-        // ['content-type' => 'application/json']
-        // );
+        $response = $serializer->serialize($collectionUsers, 'json');
+        //groups uniquement id prenom nom create at 
+
+        return new JsonResponse($response);
     }
 }

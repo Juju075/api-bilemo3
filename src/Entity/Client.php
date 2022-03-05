@@ -15,8 +15,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-use JMS\Serializer\Annotation as Serializer;
-
 /**
 * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
 * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
@@ -25,7 +23,7 @@ use JMS\Serializer\Annotation as Serializer;
 * @ApiResource(
 *  collectionOperations={
 *  "get"={
-*      "normalization_context"={"client_detail_read"},
+*      "normalization_context"={"client_collection_read"},
 *      "method"="GET",
 *      "path"="/client/{id}/users",
 *      "controller"="GetUsersCollectionController.php::class", 

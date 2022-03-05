@@ -30,6 +30,7 @@ class DeleteClientController extends AbstractController
 
         if ($userLogged === $data->getUserIdentifier()) {
             $this->em->remove($data);
+            $this->em->flush();
         }
 
         $response = ['client'=> $data->getId(), 'à ete supprime'];
