@@ -61,7 +61,7 @@ class CreateUserController extends AbstractController
             $data->addUser($user);
 
             $this->em->persist($user);
-            $this->em->flush(); //ok enregistre
+            //$this->em->flush(); //ok enregistre
 
             //Obj > Array   The HTTP status code "0" is not valid.
             $response =  $normalizer->normalize($user); // Le normalizer ne fonctionne pas.

@@ -22,7 +22,7 @@ class GetUsersCollectionController extends AbstractController
 
         $response = $serializer->serialize($collectionUsers, 'json', SerializationContext::create()->setGroups(['client_collection_read']));
         //groups uniquement id prenom nom create at 
-       $json = preg_replace('!\\r?\\n!', "", $response);
+       $json = preg_replace('!\\r?\\n!\\', "", $response);
 
         return new JsonResponse($json);
     }
