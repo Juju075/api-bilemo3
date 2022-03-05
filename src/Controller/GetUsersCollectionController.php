@@ -19,11 +19,11 @@ class GetUsersCollectionController extends AbstractController
     {
 
         // client_id
-        $response = $userRepository->findBy(['client'=>$client->getId()]); //Ne pas afficher password
-        $response->serialize();
+        $collectionUsers = $userRepository->findBy(['client'=>$client->getId()]); //Ne pas afficher password
+        $collectionUsers->serialize();
     
 
-        return new JsonResponse($response);
+        return new JsonResponse($collectionUsers);
         // return new Response($response,Response::HTTP_OK,  // User::class
         // ['content-type' => 'application/json']
         // );
