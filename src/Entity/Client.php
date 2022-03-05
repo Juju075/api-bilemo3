@@ -33,14 +33,12 @@ use JMS\Serializer\Annotation\Groups;
 *
 *  itemOperations={
 *   "get"={
-*      "normalization_context"={"client_detail_read"},
 *      "method"="GET",
 *      "path"="/client/{id}/user/{user_id}",
 *      "controller"="GetUserClientController.php::class",
 *      "openapi_context"= {"summary"="Display details on specific Client' user", "description"="2 parameters are required to perform this request."},
 *  },
 *  "post"={
-*      "denormalization_context"={"client_write"},
 *      "method"="POST",
 *      "path"="/client/{id}/user",
 *      "controller"="CreateUserController::class",

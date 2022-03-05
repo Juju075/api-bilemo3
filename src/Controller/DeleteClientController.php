@@ -24,6 +24,7 @@ class DeleteClientController extends AbstractController
      */
     public function __invoke(Client $data): JsonResponse
     {
+        $saveCLient = $data->getUserIdentifier();
         $userLogged = ($this->getUser())
             ->getUserIdentifier();
 
@@ -32,7 +33,7 @@ class DeleteClientController extends AbstractController
             $this->em->flush();
         }
 
-        $response = ['client'=> $data->getId(), 'à ete supprime'];
+        $response = ['client'=> $saveCLient, 'à ete supprime'];
         return new JsonResponse($response);
 
     }

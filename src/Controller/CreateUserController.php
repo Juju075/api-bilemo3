@@ -48,24 +48,24 @@ class CreateUserController extends AbstractController
             //contrainte unique prenom et nom
             //1 - Json > Obj User
             $user = $serializer->deserialize($request->getContent(), User::class, 'json'); //ok
+
             //3 - Verifie la validité de l’entite avant de persister.
             $errors = $validator->validate($user);
 
-            if (count($errors) > 0) { //Error Processing Request
-                // recuperer le message d'erreur 
-                //$message = $errors->ge
-                throw new \Exception("une erreur dans le Json envoye - Error Processing Request", 404); //[a corriger] ICI PROBLEM MAL CODE
+            if (count($errors) > 0) {
+                throw new \Exception("Exception une erreur dans le Json envoyé - Error Processing Request", 404); //[a corriger] ICI PROBLEM MAL CODE
             }
 
             //2 - Client::addUser
             $data->addUser($user);
 
             $this->em->persist($user);
-            //$this->em->flush(); //ok enregistre
+            $this->em->flush(); //ok enregistre
+
 
             //Obj > Array   The HTTP status code "0" is not valid.
-            $response =  $normalizer->normalize($user); // Le normalizer ne fonctionne pas.
-        
+            $response =  ['prenom:'=> $user->getPrenom(), 'nom:'=>$user->getNom()];
+
             return new JsonResponse($response);  // need array  
 
         }else{
