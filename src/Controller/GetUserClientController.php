@@ -7,6 +7,7 @@ use App\Entity\Client;
 
 use JMS\Serializer\SerializerInterface;
 
+use JMS\Serializer\SerializationContext;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
@@ -26,10 +27,9 @@ class GetUserClientController extends AbstractController
         if (! $client->getUsers()->contains($user)) {
             throw $this->createAccessDeniedException();
         }
-        //JsonContent
+
         $response = $serializer->serialize($user, 'json');
 
-        //Array
         return new Response($response,Response::HTTP_OK,
         ['content-type' => 'application/json']
         );

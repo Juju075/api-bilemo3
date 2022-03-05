@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Client;
 use App\Repository\UserRepository;
 use JMS\Serializer\SerializerInterface;
+use JMS\Serializer\SerializationContext;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,9 +20,10 @@ class GetUsersCollectionController extends AbstractController
     {
         $collectionUsers = $userRepository->findBy(['client'=>$client->getId()]); //Ne pas afficher password
 
-        $response = $serializer->serialize($collectionUsers, 'json');
+        $response = $serializer->serialize($collectionUsers, 'json', SerializationContext::create()->setGroups(['client_collection_read']));
         //groups uniquement id prenom nom create at 
+       $json = preg_replace('!\\r?\\n!', "", $response);
 
-        return new JsonResponse($response);
+        return new JsonResponse($json);
     }
 }

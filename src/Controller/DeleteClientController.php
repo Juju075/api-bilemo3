@@ -24,7 +24,6 @@ class DeleteClientController extends AbstractController
      */
     public function __invoke(Client $data): JsonResponse
     {
-
         $userLogged = ($this->getUser())
             ->getUserIdentifier();
 

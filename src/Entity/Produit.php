@@ -8,7 +8,7 @@ use App\Entity\Traits\Timestampable;
 use JMS\Serializer\Annotation as Serializer;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiProperty;
-
+use JMS\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -47,8 +47,6 @@ class Produit
     * @ORM\Column(type="string", length=255)
     * @Assert\Length(min = 3, max = 50)
     * @Assert\Unique
-    * @ApiProperty(
-    *     openapiContext={"required"=true, "minLength"=4, "example"="some example text"})
     */
     private $name;
 
