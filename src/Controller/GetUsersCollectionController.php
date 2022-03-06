@@ -16,15 +16,15 @@ class GetUsersCollectionController extends AbstractController
     /**
      * @Route("/api/client/{id}/users", methods={"GET"})
      */
-    public function __invoke(Client $client, UserRepository $userRepository, SerializerInterface $serializer): JsonResponse
+    public function __invoke(Client $client, SerializerInterface $serializer): Response
     {
-        $collectionUsers = $userRepository->findBy(['client'=>$client->getId()]); //id prenom nom 
-    //     dd($collectionUsers);
 
-    //     $response = $serializer->serialize($collectionUsers, 'json', SerializationContext::create()->setGroups(['client_collection_read']));
-    //     //groups uniquement id prenom nom create at 
-    //    $json = preg_replace('!\\r?\\n!', "", $response);
+        $users = $client->getUsers(); //affiche que le client. Ne fonctionne pas
 
-        return new JsonResponse($collectionUsers); //Need array
+        $response = $serializer->serialize($users, 'json');
+
+        return new Response($response,Response::HTTP_OK,
+        ['content-type' => 'application/json']
+        );
     }
 }
