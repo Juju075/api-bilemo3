@@ -7,7 +7,13 @@ Vous pouvez les retrouver ici
 
 ====================
 
+SymfonyInsight badge
+https://insight.symfony.com/projects/029eb122-0ab8-4dc2-9043-57c8164a07d4/analyses/5
+
+====================
+
 VEUILLEZ UTILISER POSTMAN POUR CONSULTER L'API
+token non disponible sur Swagger.
 https://www.postman.com/
 
 ====================

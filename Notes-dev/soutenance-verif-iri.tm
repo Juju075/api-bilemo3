@@ -49,6 +49,9 @@ Errodr Unable to generate an IRI for \"App\\Entity\\Client\
 
 securite avoir le role client et que clien = client{id}
 
+=========================
+Symfony insight
 
+https://insight.symfony.com/what-we-analyse/composer.dependencies_not_installable
 =========================
 manuel technique
