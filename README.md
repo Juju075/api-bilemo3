@@ -17,6 +17,10 @@ token non disponible sur Swagger.
 https://www.postman.com/
 
 ====================
+MANUEL TECHNIQUE
+
+
+====================
 
 ## Table des matières.
 
