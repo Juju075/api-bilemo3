@@ -18,8 +18,7 @@ class GetUsersCollectionController extends AbstractController
      */
     public function __invoke(Client $client, SerializerInterface $serializer): Response
     {
-
-        $users = $client->getUsers(); //affiche que le client. Ne fonctionne pas
+        $users = $client->getUsers(); //ATTENTION il suit les liens fk "products"
 
         $response = $serializer->serialize($users, 'json');
 

@@ -36,7 +36,6 @@ class ExceptionsSubscriber implements EventSubscriberInterface
                     ]);
                     break;
                 case $exception instanceof InvalidArgumentException:
-                    dd('InvalidArgumentException');
                     $response->setStatusCode($exception->getCode());
                     $response->setData($exception->getMessage());
                     break;

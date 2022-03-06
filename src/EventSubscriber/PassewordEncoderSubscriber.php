@@ -36,10 +36,8 @@ private $encoder;
      */
     public function encodePassword(ViewEvent $event): void
     {
-        dump($event);
         //limite uniquement a des requete post
         $controllerResult = $event->getControllerResult; //on capte le resultat du controller  Notice: Undefined property:
-        dd($controllerResult);
        
         $method = $event->getRequest()->getMethod(); //method 
 
