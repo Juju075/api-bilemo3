@@ -15,7 +15,7 @@ class GetUsersCollectionController extends AbstractController
      */
     public function __invoke(Client $client, SerializerInterface $serializer): Response
     {
-        $users = $client->getUsers(); //Bloquer User::products 
+        $users = $client->getUsers(); //Block User::products 
 
         $response = $serializer->serialize($users, 'json');
 
@@ -23,4 +23,7 @@ class GetUsersCollectionController extends AbstractController
         ['content-type' => 'application/json']
         );
     }
+
+    //Pagination  (PagerFanta)  - https://openclassrooms.com/fr/courses/4087036-construisez-une-api-rest-avec-symfony/4323221-tutoriel-paginez-une-liste-de-ressources
+    //AutoDecouvrable (Hateoas) - https://openclassrooms.com/fr/courses/4087036-construisez-une-api-rest-avec-symfony/4343816-rendez-votre-api-auto-decouvrable-dernier-niveau-du-modele-de-maturite-de-richardson
 }
