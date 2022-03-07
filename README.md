@@ -17,7 +17,7 @@ token non disponible sur Swagger.<br/>
 https://www.postman.com/
 
 ====================<br/>
-MANUEL TECHNIQUE
+<b>MANUEL TECHNIQUE</b>
 
 Veuillez telecharger le fichier cidessous la racine du projet:<br/>
 api_bilemo.pdf
