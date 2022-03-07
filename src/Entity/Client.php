@@ -82,6 +82,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $password;
 
+    
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="client", orphanRemoval=true)
      */

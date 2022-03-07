@@ -9,7 +9,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-
 class DeleteClientController extends AbstractController
 {
     private $em;
@@ -19,22 +18,19 @@ class DeleteClientController extends AbstractController
         $this->em = $em;
     }
 
+
     /**
      * @Route("/api/client/{id}/users", methods={"DELETE"})
      */
     public function __invoke(Client $data): JsonResponse
     {
+        $this->denyAccessUnlessGranted('DELETE_CLIENT', $data);
+        //Exception
+
         $saveCLient = $data->getUserIdentifier();
-        $userLogged = ($this->getUser())
-            ->getUserIdentifier();
-
-        if ($userLogged === $data->getUserIdentifier()) {
-            $this->em->remove($data);
-            $this->em->flush();
-        }
-
+        $this->em->remove($data);
+        $this->em->flush();
         $response = ['client'=> $saveCLient, 'Action'=>'à ete supprimé'];
         return new JsonResponse($response);
-
     }
 }
