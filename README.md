@@ -28,7 +28,7 @@ api-bilemo.pdf
 
 1. [Pre required](#Pré-requis)
 2. [Installation](#Instalation)
-3. [Affichage de l'App](#use)
+3. [Affichage de l'App](#use).
 4. [Fait avec](#Fait-avec)
 5. [Auteur](#Auteur)
 
