@@ -119,10 +119,10 @@ api_bilemo_documentation.pdf<br/>
 
 - doctrine-fixtures-bundle - Generation de jeux de données.<br/>
 - jm serializer bundle -<br/>
-- lexik/jwt-authentication-bundle - https://github.com/lexik/LexikJWTAuthenticationBundle
-- PagerFanta (pagination for php) - https://github.com/whiteoctober/Pagerfanta
-- Hateoas (autodecouvrable api) - https://github.com/willdurand/Hateoas
+- lexik/jwt-authentication-bundle - https://github.com/lexik/LexikJWTAuthenticationBundle<br/>
+- PagerFanta (pagination for php) - https://github.com/whiteoctober/Pagerfanta<br/>
+- Hateoas (autodecouvrable api) - https://github.com/willdurand/Hateoas<br/>
 
 ### Auteur
 
-- **Bempime KHEVE** (https://github.com/Juju075)
+- **Bempime KHEVE** (https://github.com/Juju075)<br/>
