@@ -1,25 +1,25 @@
 ## P8_Api Bilemo
 
-Project 8 du "parcours développeur d'application PHP/Symfony" d'Openclassrooms.<br/>;
+Project 8 du "parcours développeur d'application PHP/Symfony" d'Openclassrooms.<br/>
 Ce projet consite à la création d'une apiRESTFull
 
-Vous pouvez les retrouver ici<br/>;
+Vous pouvez les retrouver ici<br/>
 
 ====================
 
-SymfonyInsight badge
+SymfonyInsight badge<br/>
 https://insight.symfony.com/projects/029eb122-0ab8-4dc2-9043-57c8164a07d4/analyses/5
 
 ====================
 
-VEUILLEZ UTILISER POSTMAN POUR CONSULTER L'API<br/>;
-token non disponible sur Swagger.<br/>;
+VEUILLEZ UTILISER POSTMAN POUR CONSULTER L'API<br/>
+token non disponible sur Swagger.<br/>
 https://www.postman.com/
 
-====================
+====================<br/>
 MANUEL TECHNIQUE
 
-Veuillez telecharger le fichier cidessous la racine du projet:<br/>;
+Veuillez telecharger le fichier cidessous la racine du projet:<br/>
 api_bilemo.pdf
 
 ====================
@@ -75,35 +75,35 @@ php bin/console doctrine:fixtures:load
   voir procédure ici;
   https://github.com/lexik/LexikJWTAuthenticationBundle/blob/2.x/Resources/doc/index.md#configuration
 
-=====================<br/>;
+=====================<br/>
 Connexion à la Bdd.
 
-- Creer un fichier config.json<br/>;
-  pour permettre au code de trouver les identifiants<br/>;
-  de connexion a la base de donnees.<br/>;
+- Creer un fichier config.json<br/>
+  pour permettre au code de trouver les identifiants<br/>
+  de connexion a la base de donnees.<br/>
 
 {
-"host": "localhost",<br/>;
-"dbname": "api_bilemo3",<br/>;
-"user": "vos identifiant personnel",<br/>;
-"pass": "votre mot de passe personnel"<br/>;
+"host": "localhost",<br/>
+"dbname": "api_bilemo3",<br/>
+"user": "vos identifiant personnel",<br/>
+"pass": "votre mot de passe personnel"<br/>
 }
 
 ======================
 
 ## use
 
-Lancer dans votre navigateur:<br/>;
-localhost .../api/doc (Documentation Swagger)<br/>;
+Lancer dans votre navigateur:<br/>
+localhost .../api/doc (Documentation Swagger)<br/>
 
-1- Activer Wamp<br/>;
-2- Terminal cmd:<br/>;
-@ symfony server:start -d<br/>;
-3- Terminal cmd<br/>;
-@ symfony open:local<br/>;
+1- Activer Wamp<br/>
+2- Terminal cmd:<br/>
+@ symfony server:start -d<br/>
+3- Terminal cmd<br/>
+@ symfony open:local<br/>
 
-Documentation pdf<br/>;
-api_bilemo_documentation.pdf<br/>;
+Documentation pdf<br/>
+api_bilemo_documentation.pdf<br/>
 
 - Authentification
 
