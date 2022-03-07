@@ -78,10 +78,6 @@ php bin/console doctrine:fixtures:load<br/>
 =====================<br/>
 Connexion à la Bdd.<br/>
 
-- Creer un fichier config.json<br/>
-  pour permettre au code de trouver les identifiants<br/>
-  de connexion a la base de donnees.<br/>
-
 {<br/>
 "host": "localhost",<br/>
 "dbname": "api_bilemo3",<br/>
