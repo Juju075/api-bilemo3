@@ -103,14 +103,14 @@ localhost .../api/doc (Documentation Swagger)<br/>
 Documentation pdf<br/>
 api_bilemo_documentation.pdf<br/>
 
-- Authentification<br/>
+- <b>AUTHENTIFICATION GET YOUR TOKEN</b> <br/>
 
-Si methode 1 chargement de la base de donnés (sql)
+<u>Si methode 1 chargement de la base de donnés (sql)</u>
 
 - login :<br/>
 - password : identique<br/><br/>
 
-Si methode 2 creation d'un nouveau jeux de données via Fixture.<br/><br/>
+<u>Si methode 2 creation d'un nouveau jeux de données via Fixture.</u><br/><br/>
 
 - login : choisir un user au hasard<br/>
 - password : identique<br/><br/>
