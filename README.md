@@ -97,8 +97,10 @@ Lancer dans votre navigateur:<br/>
 localhost .../api/doc (Documentation Swagger)<br/>
 
 1- Activer Wamp<br/>
+
 2- Terminal cmd:<br/>
 @ symfony server:start -d<br/>
+
 3- Terminal cmd<br/>
 @ symfony open:local<br/>
 
