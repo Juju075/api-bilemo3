@@ -3,12 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Client;
-use App\Repository\UserRepository;
 use JMS\Serializer\SerializerInterface;
-use JMS\Serializer\SerializationContext;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class GetUsersCollectionController extends AbstractController
@@ -18,7 +15,7 @@ class GetUsersCollectionController extends AbstractController
      */
     public function __invoke(Client $client, SerializerInterface $serializer): Response
     {
-        $users = $client->getUsers(); //ATTENTION il suit les liens fk "products"
+        $users = $client->getUsers(); //Bloquer User::products 
 
         $response = $serializer->serialize($users, 'json');
 

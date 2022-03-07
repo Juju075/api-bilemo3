@@ -19,6 +19,8 @@ https://www.postman.com/
 ====================
 MANUEL TECHNIQUE
 
+Veuillez telecharger le fichier cidessous la racine du projet:
+api-bilemo.pdf
 
 ====================
 

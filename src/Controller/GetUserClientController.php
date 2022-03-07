@@ -27,7 +27,7 @@ class GetUserClientController extends AbstractController
         }
 
         $response = $serializer->serialize($user, 'json');
-        // trop d'infos "users" et "products"
+        // trop d'infos suivi des fk "users" et "products" @Groups "client_collection_read"
         return new Response($response,Response::HTTP_OK,
         ['content-type' => 'application/json']
         );

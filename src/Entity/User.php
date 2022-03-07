@@ -47,7 +47,11 @@ class User
     private $client;
 
 
+
+
     /**
+     * Call by getUsers() - GetUsersCollectionController.php
+     * bloquer ce suivi.
      * @ORM\ManyToMany(targetEntity=Produit::class)
      */
     private $products;
@@ -56,6 +60,8 @@ class User
     {
         $this->products = new ArrayCollection();
     }
+
+
 
     public function getId(): ?int
     {

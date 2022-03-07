@@ -33,7 +33,7 @@ class DeleteClientController extends AbstractController
             $this->em->flush();
         }
 
-        $response = ['client'=> $saveCLient, 'à ete supprime'];
+        $response = ['client'=> $saveCLient, 'Action'=>'à ete supprimé'];
         return new JsonResponse($response);
 
     }
