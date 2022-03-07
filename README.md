@@ -57,14 +57,14 @@ _Go with a console to the repository and do thoses commands_
 - Crée le schema de la database.
   php bin/console doctrine:migrations:migrate
 
--Methode 1 - Charger le script sql dans phpmyadmin (creation de la base de données et du jeux de donees.)
+-<b>Methode 1</b> - Charger le script sql dans phpmyadmin (creation de la base de données et du jeux de donees.)
 
 - Lien de saisie: http://localhost/phpmyadmin/server_sql.php
 - Fichier à charger: api_bilemo3.sql (à la racine du projet)
 
 OU
 
--Methode 2 - Creation d'un jeux de donees via une fixture<br/>
+-<b>Methode 2</b> - Creation d'un jeux de donees via une fixture<br/>
 
 Apres avoir installe entierement le projet et installe les dependences.<br/>
 lancer le Terminal et saisiser la commande suivante:<br/>
