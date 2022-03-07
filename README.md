@@ -64,30 +64,30 @@ _Go with a console to the repository and do thoses commands_
 
 OU
 
--Methode 2 - Creation d'un jeux de donees via une fixture
+-Methode 2 - Creation d'un jeux de donees via une fixture<br/>
 
-Apres avoir installe entierement le projet et installe les dependences.
-lancer le Terminal et saisiser la commande suivante:
+Apres avoir installe entierement le projet et installe les dependences.<br/>
+lancer le Terminal et saisiser la commande suivante:<br/>
 
-php bin/console doctrine:fixtures:load
+php bin/console doctrine:fixtures:load<br/>
 
-- Generer les SSH Keys JWTAuthentication et passphrase key dnas .env
-  voir procédure ici;
+- Generer les SSH Keys JWTAuthentication et passphrase key dnas .env<br/>
+  voir procédure ici;<br/>
   https://github.com/lexik/LexikJWTAuthenticationBundle/blob/2.x/Resources/doc/index.md#configuration
 
 =====================<br/>
-Connexion à la Bdd.
+Connexion à la Bdd.<br/>
 
 - Creer un fichier config.json<br/>
   pour permettre au code de trouver les identifiants<br/>
   de connexion a la base de donnees.<br/>
 
-{
+{<br/>
 "host": "localhost",<br/>
 "dbname": "api_bilemo3",<br/>
 "user": "vos identifiant personnel",<br/>
 "pass": "votre mot de passe personnel"<br/>
-}
+}<br/>
 
 ======================
 
@@ -105,22 +105,22 @@ localhost .../api/doc (Documentation Swagger)<br/>
 Documentation pdf<br/>
 api_bilemo_documentation.pdf<br/>
 
-- Authentification
+- Authentification<br/>
 
 Si methode 1 chargement de la base de donnés (sql)
 
-- login :
-- password : identique
+- login :<br/>
+- password : identique<br/><br/>
 
-Si methode 2 creation d'un nouveau jeux de données via Fixture.
+Si methode 2 creation d'un nouveau jeux de données via Fixture.<br/><br/>
 
-- login : choisir un user au hasard
-- password : identique
+- login : choisir un user au hasard<br/>
+- password : identique<br/><br/>
 
 ## Bundle utilisé
 
-- doctrine-fixtures-bundle - Generation de jeux de données.
-- jm serializer bundle -
+- doctrine-fixtures-bundle - Generation de jeux de données.<br/>
+- jm serializer bundle -<br/>
 - lexik/jwt-authentication-bundle - https://github.com/lexik/LexikJWTAuthenticationBundle
 
 ### Auteur
