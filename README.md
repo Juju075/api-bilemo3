@@ -117,7 +117,7 @@ api_bilemo_documentation.pdf<br/>
 
 ## Bundle utilisé
 
-- doctrine-fixtures-bundle - Generation de jeux de données.<br/>
+- doctrine-fixtures-bundle (Géneration de jeux de données) - <br/>
 - jm serializer bundle (serialization and deserialisation)- https://github.com/schmittjoh/JMSSerializerBundle<br/>
 - lexik/jwt-authentication-bundle - https://github.com/lexik/LexikJWTAuthenticationBundle<br/>
 - PagerFanta (pagination for php) - https://github.com/whiteoctober/Pagerfanta<br/>
