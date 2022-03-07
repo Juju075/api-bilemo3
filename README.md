@@ -12,7 +12,7 @@ https://insight.symfony.com/projects/029eb122-0ab8-4dc2-9043-57c8164a07d4/analys
 
 ====================
 
-VEUILLEZ UTILISER POSTMAN POUR CONSULTER L'API<br/>
+<b>VEUILLEZ UTILISER POSTMAN POUR CONSULTER L'API</b><br/>
 token non disponible sur Swagger.<br/>
 https://www.postman.com/
 
