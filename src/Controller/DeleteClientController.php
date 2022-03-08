@@ -20,7 +20,7 @@ class DeleteClientController extends AbstractController
 
 
     /**
-     * @Route("/api/client/{id}/users", methods={"DELETE"})
+     * @Route("/api/client/{id}/users", name="app_client_delete", methods={"DELETE"})
      */
     public function __invoke(Client $data): JsonResponse
     {

@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class GetUserClientController extends AbstractController
 {
     /**
-     * @Route("/api/client/{id}/user/{user_id}", methods={"GET"})
+     * @Route("/api/client/{id}/user/{user_id}", name="app_client_detail_user", methods={"GET"})
      * @Entity("client", expr="repository.find(id)")
      * @Entity("user", expr="repository.find(user_id)")
      */

@@ -16,11 +16,15 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use JMS\Serializer\Annotation\Groups;
 
+use Hateoas\Configuration\Annotation as Hateoas;
+
 /**
 * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
 * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
 * @ORM\HasLifecycleCallbacks
 * 
+* API-PLATFORM
+*
 * @ApiResource(
 *  collectionOperations={
 *  "get"={
@@ -51,6 +55,60 @@ use JMS\Serializer\Annotation\Groups;
 *      "openapi_context"= {"summary"="Delete a specific Client ressource", "description"="description ici"},
 * },
 * })
+*
+* SELF Add in GET
+*
+* p /api/client/{id}/users
+*
+* @Hateoas\Relation(
+*      "self",
+*      href = @Hateoas\Route(
+*          "app_client_users",
+*          parameters = { "id" = "expr(object.getId())" },
+*          absolute = true 
+*      )
+* )
+*
+* AUTO-DECOUVRABLE
+*
+* @Hateoas\Relation(
+*      "create new user",
+*      href = @Hateoas\Route(
+*          "app_create_user",
+*          parameters = { "id" = "expr(object.getId())" },
+*          absolute = true 
+*      )
+* )
+*
+* @Hateoas\Relation(
+*      "delete client",
+*      href = @Hateoas\Route(
+*          "app_client_delete",
+*          parameters = { "id" = "expr(object.getId())" },
+*          absolute = true 
+*      )
+* )
+*
+* p /api/client/{id}/user/{user_id} 
+*
+* @Hateoas\Relation(
+*      "show specific user",
+*      href = @Hateoas\Route(
+*          "app_client_detail_user",
+*          parameters = { "id" = "expr(object.getId())", "user_id" = "expr(object.getId())" },
+*          absolute = true 
+*      )
+* )
+*
+* @Hateoas\Relation(
+*      "client users collection",
+*      href = @Hateoas\Route(
+*          "app_client_users",
+*          parameters = { "id" = "expr(object.getId())" },
+*          absolute = true 
+*      )
+* )
+*
 */
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
