@@ -19,6 +19,23 @@ class UserproductRepository extends ServiceEntityRepository
         parent::__construct($registry, Userproduct::class);
     }
 
+        //
+    public function search($term, $order = 'asc', $limit = 20, $offset = 0)
+    {
+        $qb = $this
+            ->createQueryBuilder('u')
+            ->orderBy('a.title', $order)
+        ;
+        
+        if ($term) {
+            $qb
+                ->where('a.title LIKE ?1')
+                ->setParameter(1, '%'.$term.'%')
+            ;
+        }
+        
+        return $this->paginate($qb, $limit, $offset);
+    }
 
 
 

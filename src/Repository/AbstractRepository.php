@@ -1,18 +1,18 @@
 <?php
-declare(strict_types = 1);
+
 namespace App\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use PagerFanta\Pagerfanta;
 use Doctrine\ORM\QueryBuilder;
 
 use PagerFanta\Adapater\DoctrineORMAdapter;
-use PagerFanta\Pagerfanta;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * Rappel PHP
  * abstract class classe qui ne va pas pouvoir être instanciée (directement).
  */
-abstract class AbstractRepository extends EntityRepository
+abstract class AbstractRepository extends ServiceEntityRepository 
 {
     /**
      * Undocumented function
@@ -28,11 +28,11 @@ abstract class AbstractRepository extends EntityRepository
             throw new \LogicException('$limit & $offstet must be greater than 0.');
         }
         
-        // $pager = new Pagerfanta(new DoctrineORMAdapter($qb));
-        // $currentPage = ceil(($offset + 1) / $limit);
-        // $pager->setCurrentPage($currentPage);
-        // $pager->setMaxPerPage((int) $limit);
+        $pager = new Pagerfanta(new DoctrineORMAdapter($qb));
+        $currentPage = ceil(($offset + 1) / $limit);
+        $pager->setCurrentPage($currentPage);
+        $pager->setMaxPerPage((int) $limit);
         
-        // return $pager;
+        return $pager;
     }
 }

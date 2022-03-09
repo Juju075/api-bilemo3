@@ -53,6 +53,7 @@ class User
      * Call by getUsers() - GetUsersCollectionController.php
      * bloquer ce suivi.
      * @ORM\ManyToMany(targetEntity=Produit::class)
+     * @Groups({"users_collection_read"})
      */
     private $products;
 

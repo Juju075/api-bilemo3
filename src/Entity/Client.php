@@ -20,7 +20,6 @@ use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
 * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
-* @ORM\Entity(repositoryClass="App\Repository\ClientRepositoryPaginate")
 *
 * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
 * @ORM\HasLifecycleCallbacks
@@ -145,6 +144,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="client", orphanRemoval=true)
+     * @Groups({"client_collection_read"})
      */
     private $users;
 

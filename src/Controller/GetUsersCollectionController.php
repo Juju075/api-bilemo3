@@ -3,82 +3,69 @@ declare(strict_types = 1);
 namespace App\Controller;
 
 use App\Entity\Client;
-use Doctrine\ORM\EntityManagerInterface;
-use Pagerfanta\Pagerfanta;
-use Pagerfanta\Adapter\ArrayAdapter;
-use JMS\Serializer\SerializerInterface;
-use Symfony\Component\HttpFoundation\Request;
 
+use Pagerfanta\Pagerfanta;
+
+use App\Repository\UserRepository;
+use JMS\Serializer\SerializerInterface;
+
+use JMS\Serializer\SerializationContext;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use JMS\Serializer\Annotation\Type;
 
 class GetUsersCollectionController extends AbstractController
 {
-    private $em;
+    /**
+     * @Type("array<App\Entity\User>")
+     */
+    public $data;
+    public $meta;
+
+    public function __construct(Pagerfanta $data) //Cannot autowire service $data
+    {
+        $this->data = $data;
+        
+        //Modification de $data.
+        //C ca la pagination affiche.
+        // $this->addMeta('limit', $data->getMaxPerPage());
+        // $this->addMeta('current_items', count($data->getCurrentPageResults()));
+        // $this->addMeta('total_items', $data->getNbResults());
+        // $this->addMeta('offset', $data->getCurrentPageOffsetStart());
+    }
 
     /**
      * @Route("/api/client/{id}/users", name="app_client_users", methods={"GET"})
      */
-    public function __invoke(Client $client, SerializerInterface $serializer): Response
+    public function __invoke(Client $client, SerializerInterface $serializer, UserRepository $UserRepository): Response
     {
-        //ClientRepository
-        $users = $client->getUsers(); //Block User::products 
+        //C le Pager
+        $users = $UserRepository->search($client->getId()); //Erreur ici
 
-        $response = $serializer->serialize($users, 'json');
+        $response = $serializer->serialize($users, 'json', SerializationContext::create()->setGroups(array('client_collection_read')));
 
         return new Response($response,Response::HTTP_OK,
         ['content-type' => 'application/json']
         );
     }
 
-    //Pagination  (PagerFanta)  - https://openclassrooms.com/fr/courses/4087036-construisez-une-api-rest-avec-symfony/4323221-tutoriel-paginez-une-liste-de-ressources
-    //babdev/pagerfanta-bundle  - https://www.babdev.com/open-source/packages/pagerfanta/docs/3.x/intro
-    //AutoDecouvrable (Hateoas) - https://openclassrooms.com/fr/courses/4087036-construisez-une-api-rest-avec-symfony/4343816-rendez-votre-api-auto-decouvrable-dernier-niveau-du-modele-de-maturite-de-richardson
 
-    public function __construct(EntityManagerInterface $em)
+    //Ajout d'une metadonnee.
+    public function addMeta($name, $value)
     {
-        $this->em = $em;
-    }
-
-    /**
-     * @Route("/api/programmers")
-     * @Method("GET")
-     */
-    public function listAction(Client $client,Request $request)
-    {
-        $page = $request->query->get('page', 1);
-
-
-        //Query builder (entitymanager)
-
-        $qb = $this->em->getRepository('ClientRepositoryPaginate')->findAll(); //findAllQueryBuilder()
-
-        $adapter = new DoctrineORMAdapter($qb);
-
-        $pagerfanta = new Pagerfanta($adapter);
-        $pagerfanta->setMaxPerPage(10);
-        $pagerfanta->setCurrentPage($page);
-
-        $programmers = [];
-
-        foreach ($pagerfanta->getCurrentPageResults() as $result) {
-            $programmers[] = $result;
+        if (isset($this->meta[$name])) {
+            throw new \LogicException(sprintf('This meta already exists. You are trying to override this meta, use the setMeta method instead for the %s meta.', $name));
         }
-
-
-        $response = $this->createApiResponse([
-            'total' => $pagerfanta->getNbResults(),
-            'count' => count($programmers),
-            'programmers' => $programmers,
-        ], 200);
-
-
-        return $response;
+        
+        $this->setMeta($name, $value);
     }
 
-
-
+    //Setter
+    public function setMeta($name, $value)
+    {
+        $this->meta[$name] = $value;
+    }
 }
 
 
