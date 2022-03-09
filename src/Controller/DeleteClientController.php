@@ -25,7 +25,7 @@ class DeleteClientController extends AbstractController
     public function __invoke(Client $data): JsonResponse
     {
         $this->denyAccessUnlessGranted('DELETE_CLIENT', $data);
-        //Exception
+        //Exception traitement Access Denied. (403 Forbidden)
 
         $saveCLient = $data->getUserIdentifier();
         $this->em->remove($data);

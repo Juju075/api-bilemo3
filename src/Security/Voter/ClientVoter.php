@@ -76,6 +76,7 @@ class ClientVoter extends Voter
         }
 
         return false;
+        throw new \LogicException('This code should not be reached!');
     }
 
     /**

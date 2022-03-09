@@ -8,6 +8,10 @@ use Doctrine\ORM\QueryBuilder;
 use PagerFanta\Adapater\DoctrineORMAdapter;
 use PagerFanta\Pagerfanta;
 
+/**
+ * Rappel PHP
+ * abstract class classe qui ne va pas pouvoir être instanciée (directement).
+ */
 abstract class AbstractRepository extends EntityRepository
 {
     /**
