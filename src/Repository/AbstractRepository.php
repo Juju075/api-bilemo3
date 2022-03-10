@@ -22,13 +22,15 @@ abstract class AbstractRepository extends ServiceEntityRepository
      * @param integer $offset l'index de l'élément par lequel on commence ;
      * @return void
      */
-    protected function paginate(QueryBuilder $qb, $limit = 20, $offset = 0)
+    protected function paginate(QueryBuilder $qb, $limit = 20, $offset = 1)
     {
         if (0 == $limit || 0 == $offset) {
             throw new \LogicException('$limit & $offstet must be greater than 0.');
         }
         
-        $pager = new Pagerfanta(new DoctrineORMAdapter($qb));
+        //Adaptater
+        $pager = new Pagerfanta(new DoctrineORMAdapter($qb)); 
+        //https://www.babdev.com/open-source/packages/pagerfanta/docs/2.x/adapters
         $currentPage = ceil(($offset + 1) / $limit);
         $pager->setCurrentPage($currentPage);
         $pager->setMaxPerPage((int) $limit);

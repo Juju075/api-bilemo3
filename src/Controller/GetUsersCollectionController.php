@@ -27,6 +27,10 @@ class GetUsersCollectionController extends AbstractController
         $pager = $UserRepository->search($client->getId()); //Erreur ici
         $response = $serializer->serialize($pager, 'json', SerializationContext::create()->setGroups(array('client_collection_read')));
 
+
+        //return new User($pager);
+        //return $pager->getCurrentPageResults();
+
         return new Response($response,Response::HTTP_OK,
         ['content-type' => 'application/json']
         );
